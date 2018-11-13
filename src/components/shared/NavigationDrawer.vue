@@ -17,11 +17,11 @@
 
 <script>
 export default {
-  name: "NavigationDrawer",
+  name: 'NavigationDrawer',
   props: {},
   data: function() {
     return {
-      domainName: "XXXDEMO.com"
+      domainName: 'XXXDEMO.com'
     };
   }
 };

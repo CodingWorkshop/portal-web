@@ -10,12 +10,12 @@
 
 <script>
 // import component
-import AppHeader from "@/components/shared/Header.vue";
-import AppFooter from "@/components/shared/Footer.vue";
-import AppNavigationDrawer from "@/components/shared/NavigationDrawer.vue";
+import AppHeader from '@/components/shared/Header.vue';
+import AppFooter from '@/components/shared/Footer.vue';
+import AppNavigationDrawer from '@/components/shared/NavigationDrawer.vue';
 
 export default {
-  name: "layout",
+  name: 'layout',
   components: {
     AppHeader,
     AppFooter,
