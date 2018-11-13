@@ -1,12 +1,18 @@
 <template>
-  <div id="app">
-    <div id="nav">
-      <router-link to="/">Home</router-link> |
-      <router-link to="/about">About</router-link>
-    </div>
-    <router-view/>
+  <div id="app"> 
+    <Layout/>
   </div>
 </template>
+
+<script>
+import Layout from "@/views/Layout.vue";
+export default {
+  name: "app",
+  components: {
+    Layout
+  }
+};
+</script>
 
 <style lang="scss">
 #app {
@@ -16,14 +22,18 @@
   text-align: center;
   color: #2c3e50;
 }
-#nav {
-  padding: 30px;
-  a {
-    font-weight: bold;
-    color: #2c3e50;
-    &.router-link-exact-active {
-      color: #42b983;
-    }
-  }
+* {
+  box-sizing: border-box;
+}
+
+ul,
+ol {
+  padding: 0;
+  margin: 0;
+  list-style-type: none;
+}
+a {
+  color: inherit;
+  text-decoration: none;
 }
 </style>
