@@ -2,12 +2,12 @@
 
 <header>
 <div class="top-header">
-  <div class="mai-don">美东时间 - {{MeiDonNow}}</div>
+    <div class="mai-don">美东时间 - {{MeiDonNow}}</div> 
 </div>
 <ul class="nav">
-<li v-for="(item, index) in navigation" :key="index">
-  <router-link :to="item.path">{{item.nameCn}}</router-link>
-</li>
+  <li v-for="(item, index) in navigation" :key="index">
+    <router-link :to="item.path">{{item.nameCn}}</router-link>
+  </li>
 </ul>
 </header>
 </template>
@@ -52,6 +52,7 @@ export default {
 .top-header {
   height: 40px;
   color: #fff;
+  line-height: 40px;
   background-color: #232323;
 }
 
