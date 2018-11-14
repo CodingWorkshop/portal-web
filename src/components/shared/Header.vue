@@ -2,13 +2,12 @@
 
 <header>
 <div class="top-header">
-  <div class="mai-don">美东时间 - 2018/11/13 (二) 02:43:54</div>
-  <div>{{time}}</div>
+    <div class="mai-don">美东时间 - {{MeiDonNow}}</div> 
 </div>
 <ul class="nav">
-    <li v-for="(item, index) in navigations" :key="index">
-      <router-link :to="item.path">{{item.nameCn}}</router-link>
-    </li>
+  <li v-for="(item, index) in navigation" :key="index">
+    <router-link :to="item.path">{{item.nameCn}}</router-link>
+  </li>
 </ul>
 </header>
 </template>
@@ -18,17 +17,17 @@ export default {
   name: 'Header',
   props: {},
   data() {
-    const time = this.dayjs().format('YYYY-MM-DD HH:mm:ss');
+    const MeiDonNow = this.dayjs().format('YYYY年MM月DD日 HH:mm:ss');
     return {
-      time: time,
-      navigations: [
+      MeiDonNow: MeiDonNow,
+      navigation: [
         {
           nameCn: '最新游戏',
-          path: '/NewGame'
+          path: '/newGame'
         },
         {
           nameCn: '热门游戏',
-          path: '/HotGame'
+          path: '/hotGame'
         },
         {
           nameCn: '电子游艺',
@@ -53,6 +52,7 @@ export default {
 .top-header {
   height: 40px;
   color: #fff;
+  line-height: 40px;
   background-color: #232323;
 }
 
