@@ -2,14 +2,12 @@
 
 <header>
 <div class="top-header">
-  <div class="mai-don">美东时间 - 2018/11/13 (二) 02:43:54</div>
+  <div class="mai-don">美东时间 - {{MeiDonNow}}</div>
 </div>
 <ul class="nav">
-  <li>最新游戏</li>
-  <li>热门游戏</li>
-  <li>电子游艺</li>
-  <li>真人视讯</li>
-  <li>捕鱼达人</li>
+<li v-for="(item, index) in navigation" :key="index">
+  <router-link :to="item.path">{{item.nameCn}}</router-link>
+</li>
 </ul>
 </header>
 </template>
@@ -17,7 +15,35 @@
 <script>
 export default {
   name: "Header",
-  props: {}
+  props: {},
+  data() {
+    const MeiDonNow = this.dayjs().format("YYYY年MM月DD日 HH:mm:ss");
+    return {
+      MeiDonNow: MeiDonNow,
+      navigation: [
+        {
+          nameCn: "最新游戏",
+          path: "/newGame"
+        },
+        {
+          nameCn: "热门游戏",
+          path: "/hotGame"
+        },
+        {
+          nameCn: "电子游艺",
+          path: "/Game"
+        },
+        {
+          nameCn: "真人视讯",
+          path: "/Live"
+        },
+        {
+          nameCn: "捕鱼达人",
+          path: "/Fish"
+        }
+      ]
+    };
+  }
 };
 </script>
 

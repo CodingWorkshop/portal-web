@@ -1,7 +1,12 @@
 import Vue from "vue";
 import Router from "vue-router";
+import dayjs from "dayjs";
 
 Vue.use(Router);
+
+Vue.prototype.dayjs = dayjs;
+
+Vue.use(dayjs);
 
 export default new Router({
   routes: [
