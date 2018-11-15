@@ -1,15 +1,14 @@
 <template>
-
-<header>
-<div class="top-header">
-    <div class="mai-don">美东时间 - {{MeiDonNow}}</div> 
-</div>
-<ul class="nav">
-  <li v-for="(item, index) in navigation" :key="index">
-    <router-link :to="item.path">{{item.nameCn}}</router-link>
-  </li>
-</ul>
-</header>
+  <header>
+    <div class="top-header">
+      <div class="mai-don">美东时间 - {{MeiDonNow}}</div>
+    </div>
+    <ul class="nav">
+      <li v-for="(item, index)in navigation" :key="index">
+        <router-link :to="item.path">{{item.nameCn}}</router-link>
+      </li>
+    </ul>
+  </header>
 </template>
 
 <script>
