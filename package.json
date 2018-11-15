@@ -3,6 +3,8 @@
   "version": "0.1.0",
   "private": true,
   "scripts": {
+    "postinstall": "if test \"$NODE_ENV\" = \"production\" ; then npm run build ; fi ",
+    "start": "node server.js",
     "serve": "vue-cli-service serve",
     "build": "vue-cli-service build",
     "lint": "vue-cli-service lint",
@@ -11,7 +13,9 @@
   "dependencies": {
     "axios": "^0.18.0",
     "dayjs": "^1.7.7",
+    "express": "^4.16.4",
     "normalize.css": "^8.0.1",
+    "serve-static": "^1.13.2",
     "vue": "^2.5.17",
     "vue-axios": "^2.1.4",
     "vue-i18n": "^8.3.1",
@@ -39,7 +43,7 @@
     "pre-commit": "lint-staged"
   },
   "lint-staged": {
-    "*.js": [
+    "src/**/*.js": [
       "vue-cli-service lint",
       "git add"
     ],
