@@ -1,19 +1,15 @@
 <template>
-  <transition name="md-fade">
-    <div class="md-backdrop"> 
-      <div class="md-container"> 
+  <transition :name="'md-' + animation">
+    <div class="md-backdrop">
+      <div class="md-container">
         <div class="md-header">
-          <slot name="header">
-            Modal弹框 
-          </slot> 
+          <slot name="header">彈窗標題</slot>
           <button type="button" class="btn-close" @click="close">x</button>
         </div>
         <div class="md-body">
-          <slot name="body">
-            这是Modal弹框的主体
-          </slot> 
+          <slot name="body">彈窗標題內容</slot>
         </div>
-      </div> 
+      </div>
     </div>
   </transition>
 </template>
@@ -21,6 +17,7 @@
 <script>
 export default {
   name: 'Modal',
+  props: ['animation'],
   data() {
     return {};
   },
@@ -85,7 +82,7 @@ export default {
   border: none;
   cursor: pointer;
 }
-
+// animation: fade-in
 .md-fade-enter,
 .md-fade-leave-active {
   opacity: 0;

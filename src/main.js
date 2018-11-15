@@ -3,23 +3,45 @@ import App from './App.vue';
 import router from './router';
 import store from './store';
 import dayjs from 'dayjs';
+import upperFirst from 'lodash/upperFirst';
+import camelCase from 'lodash/camelCase';
 import './assets/fa5/scss/fontawesome.scss';
 import './assets/fa5/scss/regular.scss';
 import './assets/fa5/scss/solid.scss';
 import './assets/fa5/scss/brands.scss';
-
-Vue.prototype.dayjs = dayjs;
-
-Vue.use(dayjs);
-
 // import normalize
 import 'normalize.css';
 
-Vue.config.productionTip = false;
-
 Vue.prototype.dayjs = dayjs;
 
 Vue.use(dayjs);
+
+Vue.config.productionTip = false;
+//use require.context to globally register components
+const requireComponent = require.context(
+  // The relative path of the components folder
+  '@/views',
+  // Whether or not to look in subfolders
+  false,
+  // The regular expression used to match base component filenames
+  /[A-Z]\w+\.(vue|js)$/
+);
+
+requireComponent.keys().forEach(fileName => {
+  // Get component config
+  const componentConfig = requireComponent(fileName);
+
+  // Get PascalCase name of component
+  const componentName = upperFirst(
+    camelCase(
+      // Strip the leading `./` and extension from the filename
+      fileName.replace(/^\.\/(.*)\.\w+$/, '$1')
+    )
+  );
+
+  // Register component globally
+  Vue.component(componentName, componentConfig.default || componentConfig);
+});
 
 new Vue({
   router,

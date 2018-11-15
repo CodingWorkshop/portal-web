@@ -3,18 +3,18 @@
     <AppHeader/>
     <!-- 侧边选单 -->
     <AppNavigationDrawer/>
-    <router-view/>  
+    <router-view/>
     <AppFooter/>
-
     <!-- Popup Modal -->
-    <AppModal v-show="isPopupModalVisible" @close="closeModal">
+    <AppModal v-show="isPopupModalVisible" @close="closeModal" :animation="popupData.animation">
       <div slot="header">{{popupData.headerTitle}}</div>
-    </AppModal>  
+      <component slot="body" :is="popupData.viewName"></component>
+    </AppModal>
   </div>
 </template>
 
 <script>
-// import component
+// Components
 import AppHeader from '@/components/shared/Header.vue';
 import AppFooter from '@/components/shared/Footer.vue';
 import AppNavigationDrawer from '@/components/shared/NavigationDrawer.vue';

@@ -1,19 +1,25 @@
 <template>
-<div class="navigation">
-  <div class="navi-top"> 
-    <div class="logo">
-      <img src="https://img00.deviantart.net/64e9/i/2018/211/5/b/nintendo__1975__vector_logo_by_dreamcopter-dcir65u.png">
+  <div class="navigation">
+    <div class="navi-top">
+      <div class="logo">
+        <img
+          src="https://img00.deviantart.net/64e9/i/2018/211/5/b/nintendo__1975__vector_logo_by_dreamcopter-dcir65u.png"
+        >
+      </div>
+      <div class="domain">{{ domainName }}</div>
     </div>
-    <div class="domain">{{ domainName }}</div>
-  </div>
     <ul class="menu">
-      <li >会员登入(Slide)</li>
+      <li>会员登入(Slide)</li>
       <li @click="openSiteMail()">站內信(Popup)</li>
       <li @click="openTransaction()">交易记录(Popup)</li>
-      <li><router-link to="/">首页</router-link></li>
-      <li><router-link to="/about">关于我们</router-link></li>
+      <li>
+        <router-link to="/">首页</router-link>
+      </li>
+      <li>
+        <router-link to="/about">关于我们</router-link>
+      </li>
     </ul>
-</div>
+  </div>
 </template>
 
 <script>
@@ -27,20 +33,23 @@ export default {
   },
   methods: {
     // 向上傳送開啟彈窗請求
+    // viewName use kebab-case
     openPopup: function(data) {
       this.$root.$emit('openPopup', data);
     },
     openSiteMail: function() {
       const info = {
         headerTitle: '站内信',
-        viewName: 'SiteMail'
+        viewName: 'site-mail',
+        animation: 'fade'
       };
       this.openPopup(info);
     },
     openTransaction: function() {
       const info = {
         headerTitle: '交易记录',
-        viewName: 'Transaction'
+        viewName: 'transaction',
+        animation: 'fade'
       };
       this.openPopup(info);
     }

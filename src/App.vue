@@ -1,13 +1,13 @@
 <template>
-  <div id="app"> 
+  <div id="app">
     <Layout/>
   </div>
 </template>
 
 <script>
-import Layout from "@/views/Layout.vue";
+import Layout from '@/views/Layout.vue';
 export default {
-  name: "app",
+  name: 'app',
   components: {
     Layout
   }
@@ -16,7 +16,7 @@ export default {
 
 <style lang="scss">
 #app {
-  font-family: "Avenir", Helvetica, Arial, sans-serif;
+  font-family: 'Avenir', Helvetica, Arial, sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
   text-align: center;

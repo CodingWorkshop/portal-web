@@ -1,7 +1,7 @@
 <template>
-<footer>
-  <p class="copy-right">Copyright © Portal-Web Reserved</p>
-</footer>
+  <footer>
+    <p class="copy-right">Copyright © Portal-Web Reserved</p>
+  </footer>
 </template>
 
 <script>
