@@ -32,10 +32,10 @@ export default {
     };
   },
   methods: {
-    // 向上傳送開啟彈窗請求
+    // change state in Vuex store
     // viewName use kebab-case
     openPopup: function(data) {
-      this.$root.$emit('openPopup', data);
+      this.$store.commit('openModal', data);
     },
     openSiteMail: function() {
       const info = {

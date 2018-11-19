@@ -6,9 +6,9 @@
     <router-view/>
     <AppFooter/>
     <!-- Popup Modal -->
-    <AppModal v-show="isPopupModalVisible" @close="closeModal" :animation="popupData.animation">
-      <div slot="header">{{popupData.headerTitle}}</div>
-      <component slot="body" :is="popupData.viewName"></component>
+    <AppModal v-show="isModalOpen" :animation="modalOption.animation">
+      <div slot="header">{{modalOption.headerTitle}}</div>
+      <component slot="body" :is="modalOption.viewName"></component>
     </AppModal>
   </div>
 </template>
@@ -29,25 +29,16 @@ export default {
     AppModal
   },
   data() {
-    return {
-      isPopupModalVisible: false,
-      popupData: {}
-    };
+    return {};
   },
-  methods: {
-    showModal: function() {
-      this.isPopupModalVisible = true;
+  methods: {},
+  computed: {
+    isModalOpen() {
+      return this.$store.state.isModalOpen;
     },
-    closeModal: function() {
-      this.isPopupModalVisible = false;
+    modalOption() {
+      return this.$store.state.modalOptions;
     }
-  },
-  mounted() {
-    // 接收來自其他子元件的開啟彈窗請求
-    this.$root.$on('openPopup', data => {
-      this.popupData = data;
-      this.showModal();
-    });
   }
 };
 </script>

@@ -23,7 +23,7 @@ export default {
   },
   methods: {
     close: function() {
-      this.$emit('close');
+      this.$store.commit('closeModal');
     }
   }
 };
