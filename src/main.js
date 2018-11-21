@@ -5,10 +5,8 @@ import store from './store';
 import dayjs from 'dayjs';
 import upperFirst from 'lodash/upperFirst';
 import camelCase from 'lodash/camelCase';
-import './assets/fa5/scss/fontawesome.scss';
-import './assets/fa5/scss/regular.scss';
-import './assets/fa5/scss/solid.scss';
-import './assets/fa5/scss/brands.scss';
+import '@fortawesome/fontawesome-free/css/all.css';
+
 // import normalize
 import 'normalize.css';
 
