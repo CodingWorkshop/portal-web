@@ -1,13 +1,12 @@
 import Vue from 'vue';
 import App from './App.vue';
 import router from './router';
-import store from './store';
+import store from './store/index';
 import dayjs from 'dayjs';
 import upperFirst from 'lodash/upperFirst';
 import camelCase from 'lodash/camelCase';
 import '@fortawesome/fontawesome-free/css/all.css';
-
-// import normalize
+import './plugins/iview.js';
 import 'normalize.css';
 
 Vue.prototype.dayjs = dayjs;

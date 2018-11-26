@@ -9,7 +9,7 @@
       <div class="domain">{{ domainName }}</div>
     </div>
     <ul class="menu">
-      <li>会员登入(Slide)</li>
+      <li @click="openLogin()">会员登入(Slide)</li>
       <li @click="openSiteMail()">站內信(Popup)</li>
       <li @click="openTransaction()">交易记录(Popup)</li>
       <li>
@@ -36,6 +36,14 @@ export default {
     // viewName use kebab-case
     openPopup: function(data) {
       this.$store.commit('openModal', data);
+    },
+    openLogin: function() {
+      const info = {
+        headerTitle: '会员登入',
+        viewName: 'account',
+        animation: 'fade'
+      };
+      this.openPopup(info);
     },
     openSiteMail: function() {
       const info = {

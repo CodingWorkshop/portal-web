@@ -34,10 +34,10 @@ export default {
   methods: {},
   computed: {
     isModalOpen() {
-      return this.$store.state.isModalOpen;
+      return this.$store.state.popup.isModalOpen;
     },
     modalOption() {
-      return this.$store.state.modalOptions;
+      return this.$store.state.popup.modalOptions;
     }
   }
 };

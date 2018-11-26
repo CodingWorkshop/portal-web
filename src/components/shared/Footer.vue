@@ -1,13 +1,18 @@
 <template>
   <footer>
+    <ArticleList></ArticleList>
     <p class="copy-right">Copyright © Portal-Web Reserved</p>
   </footer>
 </template>
 
 <script>
+import ArticleList from '@/components/ArticleList.vue';
 export default {
   name: 'Footer',
-  props: {}
+  props: {},
+  components: {
+    ArticleList
+  }
 };
 </script>
 
