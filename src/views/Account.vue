@@ -1,6 +1,6 @@
 <template>
   <div class="account">
-    <h1>You are in Account Page now</h1>
+    <i class="far fa-user-circle"></i>
     <Login></Login>
   </div>
 </template>
@@ -17,3 +17,11 @@ export default {
   }
 };
 </script>
+
+<!-- Add "scoped" attribute to limit CSS to this component only -->
+<style scoped lang="scss">
+i.fa-user-circle {
+  margin-bottom: 20px;
+  font-size: 116px;
+}
+</style>

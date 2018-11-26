@@ -6,7 +6,11 @@
     <router-view/>
     <AppFooter/>
     <!-- Popup Modal -->
-    <AppModal v-show="isModalOpen" :animation="modalOption.animation">
+    <AppModal
+      v-show="isModalOpen"
+      :animation="modalOption.animation"
+      :modal-size="modalOption.size"
+    >
       <div slot="header">{{modalOption.headerTitle}}</div>
       <component slot="body" :is="modalOption.viewName"></component>
     </AppModal>

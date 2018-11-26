@@ -15,6 +15,11 @@ export default {
 </script>
 
 <style lang="scss">
+// Theme Color
+$theme-standard-bg: #563a83;
+$theme-dark-bg: #48316c;
+$theme-light-bg: #7243bc;
+
 #app {
   font-family: 'Avenir', Helvetica, Arial, sans-serif;
   -webkit-font-smoothing: antialiased;
@@ -22,6 +27,7 @@ export default {
   text-align: center;
   color: #2c3e50;
 }
+
 * {
   box-sizing: border-box;
 }

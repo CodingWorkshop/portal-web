@@ -41,7 +41,11 @@ export default {
       const info = {
         headerTitle: '会员登入',
         viewName: 'account',
-        animation: 'fade'
+        animation: 'fade',
+        size: {
+          width: 283,
+          height: 477
+        }
       };
       this.openPopup(info);
     },
@@ -49,7 +53,11 @@ export default {
       const info = {
         headerTitle: '站内信',
         viewName: 'site-mail',
-        animation: 'fade'
+        animation: 'fade',
+        size: {
+          width: 500,
+          height: 600
+        }
       };
       this.openPopup(info);
     },
@@ -57,7 +65,11 @@ export default {
       const info = {
         headerTitle: '交易记录',
         viewName: 'transaction',
-        animation: 'fade'
+        animation: 'fade',
+        size: {
+          width: 500,
+          height: 600
+        }
       };
       this.openPopup(info);
     }

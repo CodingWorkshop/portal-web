@@ -10,7 +10,6 @@ export default {
     },
     closeModal: state => {
       state.isModalOpen = false;
-      state.modalOptions = {};
     }
   },
   actions: {}

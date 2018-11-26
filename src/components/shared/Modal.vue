@@ -1,7 +1,10 @@
 <template>
   <transition :name="'md-' + animation">
     <div class="md-backdrop">
-      <div class="md-container">
+      <div
+        class="md-container"
+        :style="{ width: containerSize.width +'px', height: containerSize.height +'px' }"
+      >
         <div class="md-header">
           <slot name="header">彈窗標題</slot>
           <button type="button" class="btn-close" @click="close">x</button>
@@ -17,13 +20,19 @@
 <script>
 export default {
   name: 'Modal',
-  props: ['animation'],
+  props: ['animation', 'modalSize'],
   data() {
     return {};
   },
   methods: {
     close: function() {
       this.$store.commit('closeModal');
+    }
+  },
+  computed: {
+    containerSize: function() {
+      // default modal size
+      return this.modalSize || { width: 283, height: 477 };
     }
   }
 };
@@ -47,8 +56,6 @@ export default {
   overflow-x: auto;
   display: flex;
   flex-direction: column;
-  min-width: 500px;
-  min-height: 400px;
   background-color: #fff;
   box-shadow: 1px 1px 9px 0;
   border-radius: 7px;
