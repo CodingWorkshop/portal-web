@@ -1,5 +1,7 @@
 import Vue from 'vue';
 import App from './App.vue';
+import axios from 'axios';
+import VueAxios from 'vue-axios';
 import router from './router';
 import store from './store/index';
 import dayjs from 'dayjs';
@@ -12,6 +14,7 @@ import 'normalize.css';
 Vue.prototype.dayjs = dayjs;
 
 Vue.use(dayjs);
+Vue.use(VueAxios, axios);
 
 Vue.config.productionTip = false;
 //use require.context to globally register components

@@ -4,9 +4,9 @@ export default {
     openGameListKind: 0
   },
   mutations: {
-    openGameList: (state, gameCategory) => {
-      state.openGameList = gameCategory.SortList;
-      state.openGameListKind = gameCategory.GameKind;
+    openGameList: (state, gameCategoryObj) => {
+      state.openGameList = gameCategoryObj.SortList;
+      state.openGameListKind = gameCategoryObj.GameKind;
     }
   },
   actions: {}
