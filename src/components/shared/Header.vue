@@ -1,47 +1,37 @@
 <template>
   <header>
     <div class="top-header">
-      <div class="mai-don">美东时间 - {{MeiDonNow}}</div>
+      <div class="wrapper">
+        <div class="top-mei-don">
+          <MeiDon></MeiDon>
+        </div>
+        <div class="top-marquee">
+          <NewsMarquee></NewsMarquee>
+        </div>
+      </div>
     </div>
-    <ul class="nav">
-      <li v-for="(item, index) in navigation" :key="index">
-        <router-link :to="item.path">{{item.nameCn}}</router-link>
-      </li>
-    </ul>
+    <div class="nav">
+      <div class="wrapper">
+        <GameCategory></GameCategory>
+      </div>
+    </div>
   </header>
 </template>
 
 <script>
+import MeiDon from '@/components/MeiDon.vue';
+import NewsMarquee from '@/components/NewsMarquee.vue';
+import GameCategory from '@/components/GameCategory.vue';
 export default {
   name: 'Header',
+  components: {
+    MeiDon,
+    NewsMarquee,
+    GameCategory
+  },
   props: {},
   data() {
-    const MeiDonNow = this.dayjs().format('YYYY年MM月DD日 HH:mm:ss');
-    return {
-      MeiDonNow: MeiDonNow,
-      navigation: [
-        {
-          nameCn: '最新游戏',
-          path: '/newGame'
-        },
-        {
-          nameCn: '热门游戏',
-          path: '/hotGame'
-        },
-        {
-          nameCn: '电子游艺',
-          path: '/Game'
-        },
-        {
-          nameCn: '真人视讯',
-          path: '/Live'
-        },
-        {
-          nameCn: '捕鱼达人',
-          path: '/Fish'
-        }
-      ]
-    };
+    return {};
   }
 };
 </script>
@@ -54,21 +44,22 @@ export default {
   line-height: 40px;
   background-color: #232323;
 }
-
 .nav {
   display: block;
   height: 84px;
   margin: 0;
   text-align: center;
   background-color: #494949;
-  li {
-    display: inline-block;
-    width: 80px;
-    height: 84px;
-    line-height: 84px;
-    color: #b2aeae;
-    text-align: center;
-    vertical-align: top;
+  .wrapper {
+    height: 100%;
   }
+}
+
+.top-mei-don {
+  float: left;
+}
+.top-marquee {
+  float: right;
+  width: 60%;
 }
 </style>

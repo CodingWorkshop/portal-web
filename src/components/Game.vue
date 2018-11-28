@@ -17,11 +17,18 @@ export default {
 <style scoped lang="scss">
 .game {
   display: inline-block;
-  width: 120px;
-  height: 140px;
+  width: 154px;
+  height: 183px;
   margin: 5px;
   padding: 10px;
+  color: #333;
+  font-size: 14px;
   background: rgba($color: #777, $alpha: 0.8);
+  border-radius: 3px;
+  i {
+    float: right;
+    color: #333;
+  }
 }
 .game img {
   display: block;

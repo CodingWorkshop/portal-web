@@ -23,7 +23,7 @@ footer {
   bottom: 0;
   left: 0;
   width: 100%;
-  height: 150px;
+  height: 93px;
   background-color: #333;
 }
 .copy-right {

@@ -42,4 +42,9 @@ a {
   color: inherit;
   text-decoration: none;
 }
+.wrapper {
+  display: block;
+  width: 1000px;
+  margin: 0 auto;
+}
 </style>
