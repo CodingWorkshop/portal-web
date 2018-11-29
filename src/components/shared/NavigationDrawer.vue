@@ -100,7 +100,7 @@ export default {
       height: 42px;
       color: #fff;
       line-height: 42px;
-      background-color: #7243bc;
+      background-color: $theme-light-bg;
     }
   }
   .menu {
