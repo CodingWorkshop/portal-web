@@ -11,21 +11,23 @@
     <ul class="menu">
       <li v-for="(item, index) in Menus" :key="index">
         <div
-          class="opemModal"
           v-if="item.open==='Modal'"
           @click="openModal(item.ActionContent)"
         >{{item.NameCn}}</div>
         <div
-          class="chaneRouter"
           v-if="item.open==='router'"
           @click="chanheRouter(item.ActionContent)"
+        >{{item.NameCn}}</div>
+        <div
+          v-if="item.open==='none' &&item.ActionContent==='logout'"
+          @click="$store.dispatch('submitLogout')"
         >{{item.NameCn}}</div>
       </li>
     </ul>
     <ul class="service-info" v-if="services">
       <li v-for="(service, index) in services" :key="index">{{service.NameCn}}</li>
     </ul>
-    <div class="chat-btn">7x24客服 {{$store.state.login.loginStatus}}</div>
+    <div class="chat-btn">7x24客服</div>
   </ul>
 </template>
 
@@ -35,52 +37,47 @@ export default {
   props: {},
   data() {
     return {
-      haslogin: this.$store.state.login.isLogin,
       domainName: 'XXXDEMO.com',
       Menus: [
         {
           NameCn: '会员登入',
           ActionContent: 'login',
-          open: 'Modal',
-          requiredLogin: false
+          open: 'Modal'
         },
         {
           NameCn: '免費開戶',
           ActionContent: '/',
-          open: '',
-          requiredLogin: false,
-          isLoginNotShow: true
+          open: ''
         },
         {
           NameCn: '免費試玩',
           ActionContent: '/',
-          open: 'blank',
-          requiredLogin: false,
-          isLoginNotShow: true
+          open: 'blank'
         },
         {
           NameCn: '優惠活動',
           ActionContent: '/',
-          open: '',
-          requiredLogin: false
+          open: ''
         },
         {
           NameCn: '站內信',
           ActionContent: 'siteMail',
-          open: 'Modal',
-          requiredLogin: true
+          open: 'Modal'
         },
         {
           NameCn: '交易紀錄',
           ActionContent: 'transaction',
-          open: 'Modal',
-          requiredLogin: true
+          open: 'Modal'
         },
         {
           NameCn: '關於我們',
           ActionContent: '/about',
-          open: 'router',
-          requiredLogin: false
+          open: 'router'
+        },
+        {
+          NameCn: '登出',
+          ActionContent: 'logout',
+          open: 'none'
         }
       ],
       services: [
@@ -98,12 +95,9 @@ export default {
     };
   },
   methods: {
-    // change state in Vuex store
-    // viewName use kebab-case
-    openPopup: function(data) {
-      this.$store.commit('openModal', data);
-    },
     openModal: function(link) {
+      // change state in Vuex store
+      // viewName use kebab-case
       const modelDetail = {
         login: {
           headerTitle: '会员登入',
@@ -133,7 +127,7 @@ export default {
           }
         }
       };
-      this.openPopup(modelDetail[link]);
+      this.$store.commit('openModal', modelDetail[link]);
     },
     chanheRouter: function(data) {
       this.$router.push({ path: data });
