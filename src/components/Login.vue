@@ -1,15 +1,16 @@
 <template>
   <div>
-    <div v-if="$store.state.login.isLogin">
+    <div v-if="$store.state.login.loginStatus">
       <p>
         Hi,
-        <strong>{{account}}</strong>!
+        <strong>{{$store.state.login.user}}</strong>!
       </p>
+      <button @click="$store.dispatch('submitLogout')">登出</button>
     </div>
     <div v-else>
-      <i-input type="text" id="account" placeholder="Account" v-model="user.account"/>
-      <i-input type="password" id="password" placeholder="Password" v-model="user.password"/>
-      <i-input type="text" id="captcha" placeholder="captcha" v-model="user.captcha"/>
+      <i-input type="text" id="account" placeholder="Account" v-model="user"/>
+      <i-input type="password" id="password" placeholder="Password" v-model="password"/>
+      <i-input type="text" id="captcha" placeholder="captcha" v-model="captcha"/>
       <Button type="success" long @click="login">SUBMIT</Button>
     </div>
   </div>
@@ -19,20 +20,23 @@
 export default {
   data() {
     return {
-      user: {
-        account: '',
-        password: '',
-        captcha: ''
-      }
+      user: '',
+      password: '',
+      captcha: ''
     };
   },
   methods: {
     login() {
-      this.$store.commit({
-        type: 'setUserData',
-        userData: this.user
-      });
-      this.$router.push('/');
+      this.$store.commit('updateSigning');
+      this.$store
+        .dispatch({
+          type: 'submitLogin',
+          user: this.user,
+          password: this.password
+        })
+        .then(() => {
+          this.$router.push({ path: '' });
+        });
     }
   },
   created() {
@@ -40,11 +44,7 @@ export default {
       this.$router.push('login');
     }
   },
-  computed: {
-    account() {
-      return this.$store.state.login.account;
-    }
-  }
+  computed: {}
 };
 </script>
 
