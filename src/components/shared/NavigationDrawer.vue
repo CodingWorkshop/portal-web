@@ -1,5 +1,5 @@
 <template>
-  <div class="navigation">
+  <ul class="navigation">
     <div class="navi-top">
       <div class="logo">
         <img
@@ -9,26 +9,92 @@
       <div class="domain">{{ domainName }}</div>
     </div>
     <ul class="menu">
-      <li @click="openLogin()">会员登入(Slide)</li>
-      <li @click="openSiteMail()">站內信(Popup)</li>
-      <li @click="openTransaction()">交易记录(Popup)</li>
-      <li>
-        <router-link to="/">首页</router-link>
-      </li>
-      <li>
-        <router-link to="/about">关于我们</router-link>
+      <li v-for="(item, index) in Menus" :key="index">
+        <div
+          class="opemModal"
+          v-if="item.open==='Modal'"
+          @click="openModal(item.ActionContent)"
+        >{{item.NameCn}}</div>
+        <div
+          class="chaneRouter"
+          v-if="item.open==='router'"
+          @click="chanheRouter(item.ActionContent)"
+        >{{item.NameCn}}</div>
       </li>
     </ul>
-  </div>
+    <ul class="service-info" v-if="services">
+      <li v-for="(service, index) in services" :key="index">{{service.NameCn}}</li>
+    </ul>
+    <div class="chat-btn">7x24客服</div>
+  </ul>
 </template>
 
 <script>
 export default {
   name: 'NavigationDrawer',
   props: {},
-  data: function() {
+  data() {
     return {
-      domainName: 'XXXDEMO.com'
+      haslogin: this.$store.state.login.isLogin,
+      domainName: 'XXXDEMO.com',
+      Menus: [
+        {
+          NameCn: '会员登入',
+          ActionContent: 'login',
+          open: 'Modal',
+          requiredLogin: false
+        },
+        {
+          NameCn: '免費開戶',
+          ActionContent: '/',
+          open: '',
+          requiredLogin: false,
+          isLoginNotShow: true
+        },
+        {
+          NameCn: '免費試玩',
+          ActionContent: '/',
+          open: 'blank',
+          requiredLogin: false,
+          isLoginNotShow: true
+        },
+        {
+          NameCn: '優惠活動',
+          ActionContent: '/',
+          open: '',
+          requiredLogin: false
+        },
+        {
+          NameCn: '站內信',
+          ActionContent: 'siteMail',
+          open: 'Modal',
+          requiredLogin: true
+        },
+        {
+          NameCn: '交易紀錄',
+          ActionContent: 'transaction',
+          open: 'Modal',
+          requiredLogin: true
+        },
+        {
+          NameCn: '關於我們',
+          ActionContent: '/about',
+          open: 'router',
+          requiredLogin: false
+        }
+      ],
+      services: [
+        {
+          service: 'qq',
+          NameCn: '客服QQ',
+          content: '123456'
+        },
+        {
+          service: 'wechat',
+          NameCn: '微信客服',
+          content: '123456'
+        }
+      ]
     };
   },
   methods: {
@@ -37,41 +103,40 @@ export default {
     openPopup: function(data) {
       this.$store.commit('openModal', data);
     },
-    openLogin: function() {
-      const info = {
-        headerTitle: '会员登入',
-        viewName: 'account',
-        animation: 'fade',
-        size: {
-          width: 283,
-          height: 477
+    openModal: function(link) {
+      const modelDetail = {
+        login: {
+          headerTitle: '会员登入',
+          viewName: 'account',
+          animation: 'fade',
+          size: {
+            width: 283,
+            height: 477
+          }
+        },
+        siteMail: {
+          headerTitle: '站内信',
+          viewName: 'site-mail',
+          animation: 'fade',
+          size: {
+            width: 500,
+            height: 600
+          }
+        },
+        transaction: {
+          headerTitle: '交易记录',
+          viewName: 'transaction',
+          animation: 'fade',
+          size: {
+            width: 500,
+            height: 600
+          }
         }
       };
-      this.openPopup(info);
+      this.openPopup(modelDetail[link]);
     },
-    openSiteMail: function() {
-      const info = {
-        headerTitle: '站内信',
-        viewName: 'site-mail',
-        animation: 'fade',
-        size: {
-          width: 500,
-          height: 600
-        }
-      };
-      this.openPopup(info);
-    },
-    openTransaction: function() {
-      const info = {
-        headerTitle: '交易记录',
-        viewName: 'transaction',
-        animation: 'fade',
-        size: {
-          width: 500,
-          height: 600
-        }
-      };
-      this.openPopup(info);
+    chanheRouter: function(data) {
+      this.$router.push({ path: data });
     }
   }
 };
@@ -86,16 +151,20 @@ export default {
   bottom: 0;
   z-index: 1;
   width: 168px;
-  background-color: #563c7f;
+  background-color: #363636;
   box-shadow: 0 2px 20px rgba(0, 0, 0, 0.65);
+
   .navi-top {
+    background-color: #563c7f;
     .logo {
       height: 134px;
       padding: 51px 20px 0;
+
       img {
         width: 100%;
       }
     }
+
     .domain {
       height: 42px;
       color: #fff;
@@ -103,17 +172,50 @@ export default {
       background-color: $theme-light-bg;
     }
   }
+
   .menu {
-    background-color: #363636;
     li {
       color: #fff;
       font-size: 16px;
       line-height: 60px;
       text-align: center;
+      cursor: pointer;
+
       &:hover {
         background-color: #282828;
       }
     }
+  }
+
+  .service-info {
+    position: absolute;
+    bottom: 50px;
+    width: 100%;
+    border-top: 3px solid #7243bc;
+    background: #48316c;
+
+    li {
+      height: 40px;
+      line-height: 40px;
+      color: #fff;
+      font-size: 16px;
+      font-weight: bold;
+      background: #48316c;
+    }
+  }
+
+  .chat-btn {
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    width: 100%;
+    height: 50px;
+    color: #fff;
+    font-size: 16px;
+    font-weight: bold;
+    line-height: 50px;
+    background-color: #563a83;
+    border-top: 1px solid #7243bc;
   }
 }
 </style>
