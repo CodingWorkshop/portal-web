@@ -25,7 +25,7 @@
     <ul class="service-info" v-if="services">
       <li v-for="(service, index) in services" :key="index">{{service.NameCn}}</li>
     </ul>
-    <div class="chat-btn">7x24客服</div>
+    <div class="chat-btn">7x24客服 {{$store.state.login.loginStatus}}</div>
   </ul>
 </template>
 
