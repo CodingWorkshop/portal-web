@@ -19,7 +19,7 @@
 </template>
 
 <script>
-import MeiDon from '@/components/MeiDon.vue';
+import MeiDon from '@/components/shared/MeiDon.vue';
 import NewsMarquee from '@/components/NewsMarquee.vue';
 import GameCategory from '@/components/GameCategory.vue';
 export default {

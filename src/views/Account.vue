@@ -6,7 +6,7 @@
 </template>
 
 <script>
-import Login from '@/components/Login.vue';
+import Login from '@/components/popup/Login.vue';
 export default {
   name: 'account',
   data: function() {

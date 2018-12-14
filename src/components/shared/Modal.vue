@@ -71,6 +71,7 @@ export default {
 }
 .md-body {
   position: relative;
+  height: 100%;
   padding: 20px 10px;
 }
 .btn-close {

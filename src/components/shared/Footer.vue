@@ -6,7 +6,7 @@
 </template>
 
 <script>
-import ArticleList from '@/components/ArticleList.vue';
+import ArticleList from '@/components/shared/ArticleList.vue';
 export default {
   name: 'Footer',
   props: {},

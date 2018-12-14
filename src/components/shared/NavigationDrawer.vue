@@ -1,5 +1,5 @@
 <template>
-  <div class="navigation" v-bind:class="{'show':this.navigationState,'hide':!this.navigationState}">
+  <div class="navigation" :class="{'show':this.navigationState,'hide':!this.navigationState}">
     <div class="change-btn" @click="changeNaviState()">
       <i class="fas fa-arrow-circle-right"></i>
       <template v-if="this.navigationState">收起</template>
@@ -167,6 +167,7 @@ export default {
     background: #7243bc;
     border-radius: 10px 0 0 10px;
     box-shadow: 0 4 8 0 rgba(0, 0, 0, 0.8);
+    cursor: pointer;
 
     &:hover {
       color: #ffd053;
