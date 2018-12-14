@@ -1,34 +1,37 @@
 <template>
-  <ul class="navigation">
-    <div class="navi-top">
-      <div class="logo">
-        <img
-          src="https://img00.deviantart.net/64e9/i/2018/211/5/b/nintendo__1975__vector_logo_by_dreamcopter-dcir65u.png"
-        >
-      </div>
-      <div class="domain">{{ domainName }}</div>
+  <div class="navigation" v-bind:class="{'show':this.navigationState,'hide':!this.navigationState}">
+    <div class="change-btn" @click="changeNaviState()">
+      <i class="fas fa-arrow-circle-right"></i>
+      <template v-if="this.navigationState">收起</template>
+      <template v-else>展開</template>
     </div>
-    <ul class="menu">
-      <li v-for="(item, index) in Menus" :key="index">
-        <div
-          v-if="item.open==='Modal'"
-          @click="openModal(item.ActionContent)"
-        >{{item.NameCn}}</div>
-        <div
-          v-if="item.open==='router'"
-          @click="chanheRouter(item.ActionContent)"
-        >{{item.NameCn}}</div>
-        <div
-          v-if="item.open==='none' &&item.ActionContent==='logout'"
-          @click="$store.dispatch('submitLogout')"
-        >{{item.NameCn}}</div>
-      </li>
-    </ul>
-    <ul class="service-info" v-if="services">
-      <li v-for="(service, index) in services" :key="index">{{service.NameCn}}</li>
-    </ul>
-    <div class="chat-btn">7x24客服</div>
-  </ul>
+    <div class="navi-box">
+      <div class="navi-head">
+        <div class="logo">
+          <img
+            src="https://img00.deviantart.net/64e9/i/2018/211/5/b/nintendo__1975__vector_logo_by_dreamcopter-dcir65u.png"
+          >
+        </div>
+        <div class="domain">{{ domainName }}</div>
+      </div>
+      <ul class="menu">
+        <li v-for="(item, index) in Menus" :key="index">
+          <div v-if="item.open==='Modal'" @click="openModal(item.ActionContent)">{{item.NameCn}}</div>
+          <div v-if="item.open==='router'" @click="chanheRouter(item.ActionContent)">{{item.NameCn}}</div>
+          <div
+            v-if="item.open==='none' &&item.ActionContent==='logout'"
+            @click="$store.dispatch('submitLogout')"
+          >{{item.NameCn}}</div>
+        </li>
+      </ul>
+      <div class="navi-foot">
+        <ul class="service-info" v-if="services">
+          <li v-for="(service, index) in services" :key="index">{{service.NameCn}}</li>
+        </ul>
+        <div class="chat-btn">7x24客服</div>
+      </div>
+    </div>
+  </div>
 </template>
 
 <script>
@@ -38,6 +41,8 @@ export default {
   data() {
     return {
       domainName: 'XXXDEMO.com',
+      screenWidth: document.body.clientWidth,
+      navigationState: true,
       Menus: [
         {
           NameCn: '会员登入',
@@ -94,43 +99,33 @@ export default {
       ]
     };
   },
+  mounted() {
+    window.onresize = () => {
+      return (() => {
+        window.screenWidth = document.body.clientWidth;
+        this.screenWidth = window.screenWidth;
+      })();
+    };
+  },
+  watch: {
+    screenWidth(val) {
+      this.screenWidth = val;
+      if (this.screenWidth < 1000) {
+        this.navigationState = false;
+      } else {
+        this.navigationState = true;
+      }
+    }
+  },
   methods: {
     openModal: function(link) {
-      // change state in Vuex store
-      // viewName use kebab-case
-      const modelDetail = {
-        login: {
-          headerTitle: '会员登入',
-          viewName: 'account',
-          animation: 'fade',
-          size: {
-            width: 283,
-            height: 477
-          }
-        },
-        siteMail: {
-          headerTitle: '站内信',
-          viewName: 'site-mail',
-          animation: 'fade',
-          size: {
-            width: 500,
-            height: 600
-          }
-        },
-        transaction: {
-          headerTitle: '交易记录',
-          viewName: 'transaction',
-          animation: 'fade',
-          size: {
-            width: 500,
-            height: 600
-          }
-        }
-      };
-      this.$store.commit('openModal', modelDetail[link]);
+      this.$store.commit('openModal', link);
     },
     chanheRouter: function(data) {
       this.$router.push({ path: data });
+    },
+    changeNaviState: function() {
+      this.navigationState = !this.navigationState;
     }
   }
 };
@@ -139,7 +134,7 @@ export default {
 <!-- Add "scoped" attribute to limit CSS to this component only -->
 <style scoped lang="scss">
 .navigation {
-  position: absolute;
+  position: fixed;
   top: 0;
   right: 0;
   bottom: 0;
@@ -147,69 +142,104 @@ export default {
   width: 168px;
   background-color: #363636;
   box-shadow: 0 2px 20px rgba(0, 0, 0, 0.65);
+  transition: width 0.4s;
 
-  .navi-top {
-    background-color: #563c7f;
-    .logo {
-      height: 134px;
-      padding: 51px 20px 0;
+  i {
+    transition: all 0.4s;
+  }
 
-      img {
-        width: 100%;
-      }
-    }
-
-    .domain {
-      height: 42px;
-      color: #fff;
-      line-height: 42px;
-      background-color: $theme-light-bg;
+  &.hide {
+    width: 0;
+    i {
+      transform: rotate(180deg);
     }
   }
 
-  .menu {
-    li {
-      color: #fff;
-      font-size: 16px;
-      line-height: 60px;
-      text-align: center;
-      cursor: pointer;
-
-      &:hover {
-        background-color: #282828;
-      }
-    }
-  }
-
-  .service-info {
+  .change-btn {
     position: absolute;
-    bottom: 50px;
-    width: 100%;
-    border-top: 3px solid #7243bc;
-    background: #48316c;
-
-    li {
-      height: 40px;
-      line-height: 40px;
-      color: #fff;
-      font-size: 16px;
-      font-weight: bold;
-      background: #48316c;
-    }
-  }
-
-  .chat-btn {
-    position: absolute;
-    bottom: 0;
-    left: 0;
-    width: 100%;
-    height: 50px;
+    top: 300px;
+    left: -34px;
+    width: 34px;
+    height: 101px;
+    padding: 10px 5px;
     color: #fff;
     font-size: 16px;
-    font-weight: bold;
-    line-height: 50px;
-    background-color: #563a83;
-    border-top: 1px solid #7243bc;
+    background: #7243bc;
+    border-radius: 10px 0 0 10px;
+    box-shadow: 0 4 8 0 rgba(0, 0, 0, 0.8);
+
+    &:hover {
+      color: #ffd053;
+    }
+  }
+
+  .navi-box {
+    > * {
+      width: 168px;
+      min-width: 168px;
+    }
+
+    .navi-head {
+      background-color: #563a83;
+      .logo {
+        height: 134px;
+        padding: 51px 20px 0;
+
+        img {
+          width: 100%;
+        }
+      }
+
+      .domain {
+        height: 42px;
+        color: #fff;
+        line-height: 42px;
+        background-color: $theme-light-bg;
+      }
+    }
+
+    .menu {
+      li {
+        color: #fff;
+        font-size: 16px;
+        line-height: 60px;
+        text-align: center;
+        cursor: pointer;
+
+        &:hover {
+          background-color: #282828;
+        }
+      }
+    }
+
+    .navi-foot {
+      position: absolute;
+      bottom: 0;
+      width: 100%;
+
+      .service-info {
+        border-top: 3px solid #7243bc;
+        background: #48316c;
+
+        li {
+          height: 40px;
+          line-height: 40px;
+          color: #fff;
+          font-size: 16px;
+          font-weight: bold;
+          background: #48316c;
+        }
+      }
+      .chat-btn {
+        height: 50px;
+        color: #fff;
+        font-size: 16px;
+        font-weight: bold;
+        line-height: 50px;
+        background-color: #48316c;
+        border-top: 1px solid #7243bc;
+      }
+    }
   }
 }
 </style>
