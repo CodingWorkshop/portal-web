@@ -10,10 +10,10 @@
     <template v-else>
       <Form :model="formItem">
         <FormItem prop="user">
-          <Input type="text" v-model="formItem.user" placeholder="Username"></Input>
+          <i-input type="text" v-model="formItem.user" placeholder="Username"></i-input>
         </FormItem>
         <FormItem prop="password">
-          <Input type="password" v-model="formItem.password" placeholder="Password"></Input>
+          <i-input type="password" v-model="formItem.password" placeholder="Password"></i-input>
         </FormItem>
         <FormItem>
           <Button type="primary" @click="login">Signin</Button>
