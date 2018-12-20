@@ -4,7 +4,8 @@
       <li
         v-for="(item, index) in steplist"
         :key="index"
-      >{{item}}{{$parent.step}}</li>
+        :class="{'active':index<=step}"
+      >{{item}}</li>
     </ul>
     <template v-if="step==0">
       <FormItem label="推荐人" prop="ParentAccount">
