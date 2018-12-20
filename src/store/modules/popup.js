@@ -41,6 +41,15 @@ export default {
           height: 438
         },
         requiredLogin: true
+      },
+      register: {
+        headerTitle: '會員註冊',
+        viewName: 'register',
+        animation: 'fade',
+        size: {
+          width: 900,
+          height: 700
+        }
       }
     }
   },

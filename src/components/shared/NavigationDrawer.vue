@@ -24,10 +24,6 @@
             <img :src="item.icon">
             {{item.NameCn}}
           </div>
-          <div
-            v-if="item.open==='none' && item.ActionContent==='logout'"
-            @click="$store.dispatch('submitLogout')"
-          >{{item.NameCn}}</div>
         </li>
       </ul>
       <div class="navi-foot">
@@ -123,12 +119,6 @@ export default {
           ActionContent: 'review',
           open: 'Modal',
           icon: 'https://i.imgur.com/WUZzQlK.png'
-        },
-        {
-          NameCn: '登出',
-          ActionContent: 'logout',
-          open: 'none',
-          icon: 'signout'
         }
       ],
       services: [
