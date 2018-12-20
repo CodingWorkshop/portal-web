@@ -80,6 +80,13 @@ export default {
       }
     }
   }
+  &.register {
+    .md-header {
+      font-size: 24px;
+      .btn-close {
+      }
+    }
+  }
 }
 .md-header {
   position: relative;
