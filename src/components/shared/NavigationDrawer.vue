@@ -15,12 +15,18 @@
         <div class="domain">{{ domainName }}</div>
       </div>
       <ul class="menu">
-        <li v-for="(item, index) in Menus" :key="index">
-          <div v-if="item.open==='Modal'" @click="openModal(item.ActionContent)">{{item.NameCn}}</div>
-          <div v-if="item.open==='router'" @click="chanheRouter(item.ActionContent)">{{item.NameCn}}</div>
+        <li v-for="(item, index) in sideMenu" :key="index">
+          <div v-if="item.open==='Modal'" @click="openModal(item.ActionContent)">
+            <img :src="item.icon">
+            {{item.NameCn}}
+          </div>
+          <div v-if="item.open==='router'" @click="chanheRouter(item.ActionContent)">
+            <img :src="item.icon">
+            {{item.NameCn}}
+          </div>
           <div
-            v-if="item.open==='none' &&item.ActionContent==='logout'"
-            @click="$store.dispatch('submitLogout')"
+            v-if="item.open==='none' && item.ActionContent==='logout'"
+            @click="$store.dispatch('submitLogout');chanheRouter('/')"
           >{{item.NameCn}}</div>
         </li>
       </ul>
@@ -47,42 +53,82 @@ export default {
         {
           NameCn: '会员登入',
           ActionContent: 'login',
-          open: 'Modal'
+          open: 'Modal',
+          icon: 'https://i.imgur.com/Cuvtop7.png'
         },
         {
-          NameCn: '免費開戶',
-          ActionContent: '/',
-          open: ''
+          NameCn: '免费开户',
+          ActionContent: 'register',
+          open: 'Modal',
+          icon: 'https://i.imgur.com/eokHtFS.png'
         },
         {
-          NameCn: '免費試玩',
-          ActionContent: '/',
-          open: 'blank'
+          NameCn: '免费试玩',
+          ActionContent: 'freeplay',
+          open: 'Modal',
+          icon: 'https://i.imgur.com/01XD9Aw.png'
         },
         {
-          NameCn: '優惠活動',
-          ActionContent: '/',
-          open: ''
+          NameCn: '优惠活动',
+          ActionContent: 'promotion',
+          open: 'Modal',
+          icon: 'https://i.imgur.com/VuZUT3m.png'
+        },
+        {
+          NameCn: '手机投注',
+          ActionContent: '/Mobile',
+          open: 'blank',
+          icon: 'https://i.imgur.com/JOTgWVI.png'
+        }
+      ],
+      loginMenu: [
+        {
+          NameCn: '会员中心',
+          ActionContent: 'account',
+          open: 'Modal',
+          icon: 'https://i.imgur.com/SAgWk6X.png'
         },
         {
           NameCn: '站內信',
           ActionContent: 'siteMail',
-          open: 'Modal'
+          open: 'Modal',
+          icon: 'https://i.imgur.com/QQdcFWs.png'
         },
         {
-          NameCn: '交易紀錄',
+          NameCn: '帐务记录',
           ActionContent: 'transaction',
-          open: 'Modal'
+          open: 'Modal',
+          icon: 'https://i.imgur.com/Tec3LLS.png'
         },
         {
-          NameCn: '關於我們',
-          ActionContent: '/about',
-          open: 'router'
+          NameCn: '投注记录',
+          ActionContent: 'betrecord',
+          open: 'Modal',
+          icon: 'https://i.imgur.com/dQf3aQD.png'
+        },
+        {
+          NameCn: '优惠活动',
+          ActionContent: 'promotion',
+          open: 'Modal',
+          icon: 'https://i.imgur.com/VuZUT3m.png'
+        },
+        {
+          NameCn: '时时返水',
+          ActionContent: 'atd',
+          open: 'Modal',
+          icon: 'https://i.imgur.com/Nhw5zvJ.png'
+        },
+        {
+          NameCn: '最近浏览',
+          ActionContent: 'review',
+          open: 'Modal',
+          icon: 'https://i.imgur.com/WUZzQlK.png'
         },
         {
           NameCn: '登出',
           ActionContent: 'logout',
-          open: 'none'
+          open: 'none',
+          icon: 'signout'
         }
       ],
       services: [
@@ -106,6 +152,15 @@ export default {
         this.screenWidth = window.screenWidth;
       })();
     };
+  },
+  computed: {
+    sideMenu: function() {
+      if (this.$store.state.login.loginStatus) {
+        return this.loginMenu;
+      } else {
+        return this.Menus;
+      }
+    }
   },
   watch: {
     screenWidth(val) {
@@ -204,11 +259,15 @@ export default {
         color: #fff;
         font-size: 16px;
         line-height: 60px;
-        text-align: center;
+        text-align: left;
         cursor: pointer;
 
         &:hover {
           background-color: #282828;
+        }
+        img {
+          vertical-align: middle;
+          margin: 0 5px 0 35px;
         }
       }
     }

@@ -2,7 +2,6 @@ export default {
   state: {
     account: '',
     password: '',
-    isLogin: false,
     signing: false,
     loginStatus: false,
     user: '',

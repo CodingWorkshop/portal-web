@@ -3,7 +3,10 @@
     <div class="md-backdrop">
       <div
         class="md-container"
-        :style="{ width: containerSize.width +'px', height: containerSize.height +'px' }"
+        :class="modaleClass"
+        :style="{
+         width: containerSize.width +'px',
+         height: containerSize.height +'px'}"
       >
         <div class="md-header">
           <slot name="header">彈窗標題</slot>
@@ -20,7 +23,7 @@
 <script>
 export default {
   name: 'Modal',
-  props: ['animation', 'modalSize'],
+  props: ['animation', 'modalName', 'modalSize'],
   data() {
     return {};
   },
@@ -33,6 +36,9 @@ export default {
     containerSize: function() {
       // default modal size
       return this.modalSize || { width: 283, height: 477 };
+    },
+    modaleClass: function() {
+      return this.modalName || '';
     }
   }
 };
