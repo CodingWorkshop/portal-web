@@ -3,7 +3,10 @@
     <div class="md-backdrop">
       <div
         class="md-container"
-        :style="{ width: containerSize.width +'px', height: containerSize.height +'px' }"
+        :class="modaleClass"
+        :style="{
+         width: containerSize.width +'px',
+         height: containerSize.height +'px'}"
       >
         <div class="md-header">
           <slot name="header">彈窗標題</slot>
@@ -20,7 +23,7 @@
 <script>
 export default {
   name: 'Modal',
-  props: ['animation', 'modalSize'],
+  props: ['animation', 'modalName', 'modalSize'],
   data() {
     return {};
   },
@@ -33,6 +36,9 @@ export default {
     containerSize: function() {
       // default modal size
       return this.modalSize || { width: 283, height: 477 };
+    },
+    modaleClass: function() {
+      return this.modalName || '';
     }
   }
 };
@@ -59,6 +65,21 @@ export default {
   background-color: #fff;
   box-shadow: 1px 1px 9px 0;
   border-radius: 7px;
+  &.AccountBox {
+    margin-top: -105px;
+    background: #494949;
+    .md-header {
+      background: #000;
+      .btn-close {
+        right: auto;
+        left: 10px;
+        top: 9px;
+        width: 25px;
+        height: 25px;
+        line-height: 0;
+      }
+    }
+  }
 }
 .md-header {
   position: relative;
@@ -71,6 +92,7 @@ export default {
 }
 .md-body {
   position: relative;
+  height: 100%;
   padding: 20px 10px;
 }
 .btn-close {

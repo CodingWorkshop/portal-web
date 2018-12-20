@@ -2,7 +2,6 @@ export default {
   state: {
     account: '',
     password: '',
-    isLogin: false,
     signing: false,
     loginStatus: false,
     user: '',
@@ -40,6 +39,7 @@ export default {
       store.commit('updateUser', {
         user: ''
       });
+      // this.$router.push('/');
     }
   }
 };

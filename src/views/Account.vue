@@ -6,7 +6,7 @@
 </template>
 
 <script>
-import Login from '@/components/Login.vue';
+import Login from '@/components/popup/Login.vue';
 export default {
   name: 'account',
   data: function() {
@@ -20,6 +20,10 @@ export default {
 
 <!-- Add "scoped" attribute to limit CSS to this component only -->
 <style scoped lang="scss">
+.account {
+  padding: 0 15px;
+}
+
 i.fa-user-circle {
   margin-bottom: 20px;
   font-size: 116px;

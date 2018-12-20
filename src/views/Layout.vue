@@ -9,6 +9,7 @@
     <AppModal
       v-show="isModalOpen"
       :animation="modalOption.animation"
+      :modal-name="modalOption.viewName"
       :modal-size="modalOption.size"
     >
       <div slot="header">{{modalOption.headerTitle}}</div>
