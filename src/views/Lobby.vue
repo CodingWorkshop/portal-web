@@ -1,19 +1,23 @@
 <template>
   <div class="lobby">
-    <h1>遊戲列表</h1>
     <div class="wrapper">
+      <SearchBar></SearchBar>
+      <h1>遊戲列表</h1>
       <GameList></GameList>
     </div>
   </div>
 </template>
 <script>
+import SearchBar from '@/components/SearchBar.vue';
 import GameList from '@/components/GameList.vue';
+
 export default {
-  name: 'about',
+  name: 'lobby',
   data: function() {
     return {};
   },
   components: {
+    SearchBar,
     GameList
   }
 };

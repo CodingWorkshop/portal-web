@@ -1,6 +1,6 @@
 <template>
   <div class="layout">
-    <AppHeader/>
+    <AppHeader class="header"/>
     <!-- 侧边选单 -->
     <AppNavigationDrawer/>
     <router-view/>
@@ -46,3 +46,10 @@ export default {
   }
 };
 </script>
+<!-- Add "scoped" attribute to limit CSS to this component only -->
+<style scoped lang="scss">
+.header {
+  position: relative;
+  z-index: 3;
+}
+</style>

@@ -10,6 +10,10 @@
         <i class="fas" :class="gc.Icon"></i>
         {{gc.GameName}}
       </li>
+      <li @click="openSearchBar()">
+        <i class="fas fa-search"></i>
+        Search
+      </li>
     </ul>
   </div>
 </template>
@@ -27,6 +31,9 @@ export default {
     openGameList: function(gameCategoryObj) {
       this.$store.commit('openGameList', gameCategoryObj);
       this.$router.push('lobby');
+    },
+    openSearchBar: function() {
+      this.$store.commit('switchSearchBar');
     }
   },
   mounted() {

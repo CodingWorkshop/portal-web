@@ -1,10 +1,10 @@
 <template>
-  <div class="mai-don">美东时间 - {{MeiDonNow}}</div>
+  <div class="mei-don">美东时间 - {{MeiDonNow}}</div>
 </template>
 
 <script>
 export default {
-  name: 'MaiDon',
+  name: 'MeiDon',
   props: {},
   data() {
     const MeiDonNow = this.dayjs().format('YYYY年MM月DD日 HH:mm:ss');
