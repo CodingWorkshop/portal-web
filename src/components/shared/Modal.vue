@@ -65,6 +65,21 @@ export default {
   background-color: #fff;
   box-shadow: 1px 1px 9px 0;
   border-radius: 7px;
+  &.AccountBox {
+    margin-top: -105px;
+    background: #494949;
+    .md-header {
+      background: #000;
+      .btn-close {
+        right: auto;
+        left: 10px;
+        top: 9px;
+        width: 25px;
+        height: 25px;
+        line-height: 0;
+      }
+    }
+  }
 }
 .md-header {
   position: relative;

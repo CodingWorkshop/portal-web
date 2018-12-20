@@ -1,13 +1,6 @@
 <template>
   <div>
-    <template v-if="$store.state.login.loginStatus">
-      <p>
-        Hi,
-        <strong>{{$store.state.login.user}}</strong>!
-      </p>
-      <button @click="$store.dispatch('submitLogout')">登出</button>
-    </template>
-    <template v-else>
+    <template v-if="!$store.state.login.loginStatus">
       <Form :model="formItem">
         <FormItem>
           <i-input type="text" v-model="formItem.user" placeholder="账号"></i-input>
@@ -57,7 +50,7 @@ export default {
           password: this.formItem.password
         })
         .then(() => {
-          // this.$store.commit('closeModal');
+          this.$store.commit('openModal', 'AccountBox');
         });
     },
     forget() {

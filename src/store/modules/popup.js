@@ -19,7 +19,8 @@ export default {
         size: {
           width: 500,
           height: 600
-        }
+        },
+        requiredLogin: true
       },
       transaction: {
         headerTitle: '交易记录',
@@ -28,7 +29,18 @@ export default {
         size: {
           width: 500,
           height: 600
-        }
+        },
+        requiredLogin: true
+      },
+      AccountBox: {
+        headerTitle: '',
+        viewName: 'AccountBox',
+        animation: 'fade',
+        size: {
+          width: 283,
+          height: 438
+        },
+        requiredLogin: true
       }
     }
   },

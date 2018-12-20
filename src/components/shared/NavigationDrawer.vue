@@ -26,7 +26,7 @@
           </div>
           <div
             v-if="item.open==='none' && item.ActionContent==='logout'"
-            @click="$store.dispatch('submitLogout');chanheRouter('/')"
+            @click="$store.dispatch('submitLogout')"
           >{{item.NameCn}}</div>
         </li>
       </ul>
@@ -84,7 +84,7 @@ export default {
       loginMenu: [
         {
           NameCn: '会员中心',
-          ActionContent: 'account',
+          ActionContent: 'AccountBox',
           open: 'Modal',
           icon: 'https://i.imgur.com/SAgWk6X.png'
         },

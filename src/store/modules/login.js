@@ -39,6 +39,7 @@ export default {
       store.commit('updateUser', {
         user: ''
       });
+      // this.$router.push('/');
     }
   }
 };
