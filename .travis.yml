@@ -10,7 +10,7 @@ install:
   - yarn install
 
 script:
-  - npm run build
+  - npm run build --mode gh-page
 
 deploy:
   local-dir: dist
