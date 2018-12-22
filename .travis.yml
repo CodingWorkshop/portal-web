@@ -9,8 +9,11 @@ branches:
 install:
   - yarn install
 
+before_script:
+  - npm install -g vue-cli-service
+
 script:
-  - npm run build --mode gh-page
+  - vue-cli-service build --mode gh-page
 
 deploy:
   local-dir: dist
