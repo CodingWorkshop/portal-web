@@ -13,7 +13,7 @@ before_script:
   - npm install -g @vue/cli
 
 script:
-  - vue-cli-service build --mode gh-page
+  - vue-cli-service build --mode gh-pages
 
 deploy:
   local-dir: dist
