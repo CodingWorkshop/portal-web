@@ -10,7 +10,7 @@ install:
   - yarn install
 
 before_script:
-  - npm install -g vue-cli-service
+  - npm install -g @vue/cli
 
 script:
   - vue-cli-service build --mode gh-page
