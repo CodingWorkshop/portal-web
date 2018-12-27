@@ -1,6 +1,6 @@
 language: node_js
 node_js:
-  - '11'
+  - "11"
 
 branches:
   only:
@@ -13,13 +13,13 @@ before_script:
   - npm install -g @vue/cli
 
 script:
-  - vue-cli-service build --mode gh-pages
+  - npm run theme gh-pages
 
 deploy:
   local-dir: dist
   provider: pages
   skip-cleanup: true
-  github-token: $GITHUB_TOKEN  # Set in the settings page of your repository, as a secure variable
+  github-token: $GITHUB_TOKEN # Set in the settings page of your repository, as a secure variable
   keep-history: true
   on:
     branch: master
