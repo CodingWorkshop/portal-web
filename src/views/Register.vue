@@ -1,11 +1,7 @@
 <template>
-  <Form :model="formItem" :label-width="120" :rules="ruleValidate">
+  <Form :model="formItem" :label-width="120" :rules="ruleValidate" class="register-form">
     <ul class="step-list">
-      <li
-        v-for="(item, index) in steplist"
-        :key="index"
-        :class="{'active':index<=step}"
-      >{{item}}</li>
+      <li v-for="(item, index) in steplist" :key="index" :class="{'active':index<=step}">{{item}}</li>
     </ul>
     <template v-if="step==0">
       <FormItem label="推荐人" prop="ParentAccount">
@@ -23,14 +19,18 @@
       <FormItem label="取款密码" prop="MoneyPassword">
         <i-input v-model="formItem.MoneyPassword" placeholder="Enter something..."></i-input>
       </FormItem>
-      <FormItem>
-        <Button @click="nextStep()" style="margin-left: 8px">下一步</Button>
+      <FormItem class="step-1-btn">
+        <Checkbox v-model="formItem.agree">
+          已满18 岁，且同意本站
+          <span>用户注册协议</span>
+        </Checkbox>
+        <Button @click="nextStep()">下一步</Button>
       </FormItem>
     </template>
     <template v-else-if="step==1">
       <FormItem>
-        <Button @click="prevStep()" style>下一步</Button>
-        <Button @click="nextStep()" style="margin-left: 8px">下一步</Button>
+        <Button class="prev-btn" @click="prevStep()" style>上一步</Button>
+        <Button @click="nextStep()">下一步</Button>
       </FormItem>
     </template>
     <template v-else-if="step==2"></template>
@@ -85,12 +85,27 @@ export default {
             message: 'The name cannot be empty',
             trigger: 'blur'
           }
+        ],
+        agree: [
+          {
+            required: true
+          }
         ]
       }
     };
   },
   methods: {
     nextStep: function() {
+      switch (this.step) {
+        case 0:
+          console.log(`step 1 done. ${JSON.stringify(this.formItem)} `);
+          break;
+        case 1:
+          console.log(`step 2 done. ${JSON.stringify(this.formItem)} `);
+          break;
+        default:
+          break;
+      }
       this.step++;
     },
     prevStep: function() {
@@ -137,6 +152,42 @@ export default {
       }
       &:after {
         background-image: url('https://i.imgur.com/4ePgveS.png');
+      }
+    }
+  }
+}
+.ivu-form .ivu-form-item-label {
+  font-size: 14px;
+  font-weight: bold;
+}
+form {
+  .step-1-btn {
+    margin: 0 -10px;
+    padding: 15px 10px 0 0;
+    text-align: right;
+    border-top: 2px solid #563a84;
+    label {
+      float: left;
+      color: #5c5c5c;
+    }
+  }
+  button {
+    width: 164px;
+    height: 44px;
+    margin: 0 10px;
+    color: #fff;
+    font-weight: bold;
+    border-radius: 10px;
+    background: #563a83;
+    border: none;
+    &:hover {
+      color: #fff;
+      background: #48326c;
+    }
+    &.prev-btn {
+      background: #326a9a;
+      &:hover {
+        background: #204666;
       }
     }
   }
