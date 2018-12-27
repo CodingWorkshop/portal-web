@@ -13,7 +13,7 @@ before_script:
   - npm install -g @vue/cli
 
 script:
-  - npm run theme gh-pages
+  - npm run theme --mode gh-pages
 
 deploy:
   local-dir: dist

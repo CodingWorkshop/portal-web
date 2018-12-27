@@ -4,8 +4,8 @@ const request = require('request');
 const { spawn } = require('child_process');
 
 const args = Array.apply(null, process.argv);
-console.log('args: ', args);
-console.log('lengths: ', args.length);
+//console.log('args: ', args);
+//console.log('lengths: ', args.length);
 
 let theme = 'staging';
 if (args.length > 2) {
