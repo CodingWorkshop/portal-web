@@ -8,7 +8,7 @@ const {
 } = require('child_process');
 
 const configuration = process.argv[2] || 'staging';
-const envHttpUrl = `https://raw.githubusercontent.com/CodingWorkshop/env-portal-mobile/master/.env.${configuration}`;
+const envHttpUrl = `https://raw.githubusercontent.com/CodingWorkshop/env-portal-web/master/.env.${configuration}`;
 
 buildTheme()
   .then(() => produceWebSiteEnvVariable())
@@ -29,7 +29,7 @@ function runBuild() {
 
 function buildTheme() {
   return axios.get(getThemeVariableUrl())
-    .then(res => generateVariablesLess(res.data))
+    .then(res => generateVariablesScss(res.data))
     .then(() => console.log(`[${getNow()}][INFO]:Build theme over !!!`))
     .catch(err => console.log(
       `[${getNow()}][ERROR]:Build Fail : write file fail ! ${err}`));
@@ -39,7 +39,7 @@ function getThemeVariableUrl() {
   return `https://raw.githubusercontent.com/CodingWorkshop/env-portal-web/master/variables.${configuration}.scss`;
 }
 
-function generateVariablesLess(res) {
+function generateVariablesScss(res) {
   return fs.writeFile(
     path.join(
       process.cwd(),
