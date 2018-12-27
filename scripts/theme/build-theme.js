@@ -1,56 +1,74 @@
 const fs = require('fs-extra');
 const path = require('path');
-const request = require('request');
-const { spawn } = require('child_process');
+const axios = require('axios');
+const prettier = require("prettier");
+const dayjs = require('dayjs');
+const {
+  spawn
+} = require('child_process');
 
-const args = Array.apply(null, process.argv);
-//console.log('args: ', args);
-//console.log('lengths: ', args.length);
+const configuration = process.argv[2] || 'staging';
+const envHttpUrl = `https://raw.githubusercontent.com/CodingWorkshop/env-portal-mobile/master/.env.${configuration}`;
 
-let theme = 'staging';
-if (args.length > 2) {
-  theme = args[2];
+buildTheme()
+  .then(() => produceWebSiteEnvVariable())
+  .then(() => runBuild())
+  .catch(() => console.log(`[${getNow()}][ERROR]:Produce .env.${configuration} error.`));
+
+function produceWebSiteEnvVariable() {
+  return axios.get(envHttpUrl)
+    .then(res => generateEnvironmentFile(res.data))
+    .then(() => console.log(`[${getNow()}][INFO]:Produce .env.${configuration} done.`));
 }
 
-//const envFilePath = path.join(process.cwd(), `${theme}`);
+function runBuild() {
+  spawn(/^win/.test(process.platform) ? 'vue-cli-service.cmd' : 'vue-cli-service', ['build', '--mode', configuration], {
+    stdio: 'inherit'
+  });
+}
 
-//console.log('envFilePath: ', envFilePath);
+function buildTheme() {
+  return axios.get(getThemeVariableUrl())
+    .then(res => generateVariablesLess(res.data))
+    .then(() => console.log(`[${getNow()}][INFO]:Build theme over !!!`))
+    .catch(err => console.log(
+      `[${getNow()}][ERROR]:Build Fail : write file fail ! ${err}`));
+}
 
-const baseScssFilePath = path.join(process.cwd(), `\\src\\styles\\base.scss`);
+function getThemeVariableUrl() {
+  return `https://raw.githubusercontent.com/CodingWorkshop/env-portal-web/master/variables.${configuration}.scss`;
+}
 
-//console.log('baseScssFilePath: ', baseScssFilePath);
-// return spawn('vue-cli-service', ['build', '--mode', theme], {
-//     stdio: 'inherit'
-// });
+function generateVariablesLess(res) {
+  return fs.writeFile(
+    path.join(
+      process.cwd(),
+      'src',
+      'styles',
+      'variables.scss'
+    ),
+    formatLessFile(res),
+    'utf8'
+  );
+}
 
-let configURI = `https://raw.githubusercontent.com/CodingWorkshop/env-portal-web/master/${theme}.scss`;
-//console.log(configURI);
-return request(
-  {
-    method: 'GET',
-    uri: configURI
-  },
-  (error, response, body) => {
-    //console.log(body);
+function formatLessFile(res) {
+  return prettier.format(res, {
+    parser: 'scss'
+  });
+}
 
-    return fs.writeFile(baseScssFilePath, body).then(() =>
-      spawn(
-        /^win/.test(process.platform)
-          ? 'vue-cli-service.cmd'
-          : 'vue-cli-service',
-        ['build', '--mode', theme],
-        {
-          stdio: 'inherit'
-        }
-        //spawn(
-        //  /^win/.test(process.platform)
-        //    ? 'vue-cli-service.cmd'
-        //    : 'vue-cli-service',
-        //  ['serve'],
-        //  {
-        //    stdio: 'inherit'
-        //  }
-      )
-    );
-  }
-);
+function getNow() {
+  return dayjs().format('YYYY-MM-DD HH:mm:ss')
+}
+
+function generateEnvironmentFile(env) {
+  return fs.writeFile(
+    path.join(
+      process.cwd(),
+      `.env.${configuration}`
+    ),
+    env,
+    'utf8'
+  );
+}
