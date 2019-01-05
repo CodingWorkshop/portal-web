@@ -64,4 +64,8 @@ export default {
   position: relative;
   z-index: 3;
 }
+/deep/ .wrapper {
+  width: 1000px;
+  margin: 0 auto;
+}
 </style>
