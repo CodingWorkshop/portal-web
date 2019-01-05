@@ -1,5 +1,4 @@
 <template>
-  <transtion>
     <div class="searchbar" :class="{'active' : isSearchBarOpen}">
       <input type="text" id="search" placeholder="search" v-model="search">
       <div class="list">
@@ -15,7 +14,6 @@
         </ul>
       </div>
     </div>
-  </transtion>
 </template>
 
 <script>
@@ -24,6 +22,7 @@ export default {
   props: {},
   data() {
     return {
+      search: '',
       Hot: ['好熱', '真的很熱', '熱爆了', '熱熱', '台中熱'],
       History: ['這個', '小秘密', '午餐吃什麼', '提高尾牙抽獎中獎率', '蛤']
     };

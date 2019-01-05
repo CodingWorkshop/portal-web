@@ -23,6 +23,7 @@
 <script>
 export default {
   name: 'Modal',
+  components: {},
   props: ['animation', 'modalName', 'modalSize'],
   data() {
     return {};
@@ -52,7 +53,7 @@ export default {
   right: 0;
   bottom: 0;
   left: 0;
-  z-index: 2;
+  z-index: 5;
   background-color: rgba(0, 0, 0, 0.7);
   display: flex;
   justify-content: center;

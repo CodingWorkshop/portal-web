@@ -8,7 +8,7 @@
 <script>
 import Login from '@/components/popup/Login.vue';
 export default {
-  name: 'account',
+  name: 'AccountLogin',
   data: function() {
     return {};
   },

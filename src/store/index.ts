@@ -18,12 +18,7 @@ export default new Vuex.Store({
     createPersistedState({
       storage: {
         getItem: key => localStorage.getItem(key),
-        setItem: (key, value) => {
-          localStorage.setItem(key, value, {
-            expires: 3,
-            secure: true
-          });
-        },
+        setItem: (key, value) => localStorage.setItem(key, value),
         removeItem: key => localStorage.removeItem(key)
       },
       paths: ['login.loginStatus', 'login.user']

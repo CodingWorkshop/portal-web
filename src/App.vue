@@ -4,14 +4,13 @@
   </div>
 </template>
 
-<script>
-import Layout from '@/views/Layout.vue';
-export default {
-  name: 'app',
-  components: {
-    Layout
-  }
-};
+
+<script lang="ts">
+import { Component, Mixins } from 'vue-property-decorator';
+import AppCtrl from '../src/controllers/App';
+
+@Component
+export default class app extends Mixins(AppCtrl) {}
 </script>
 
 <style lang="scss">
@@ -22,24 +21,14 @@ export default {
   text-align: center;
   color: #2c3e50;
 }
-
-* {
-  box-sizing: border-box;
-}
-
-ul,
-ol {
-  padding: 0;
-  margin: 0;
-  list-style-type: none;
-}
-a {
-  color: inherit;
-  text-decoration: none;
-}
-.wrapper {
-  display: block;
-  width: 1000px;
-  margin: 0 auto;
+#nav {
+  padding: 30px;
+  a {
+    font-weight: bold;
+    color: #2c3e50;
+    &.router-link-exact-active {
+      color: #42b983;
+    }
+  }
 }
 </style>

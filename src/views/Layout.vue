@@ -25,13 +25,24 @@ import AppFooter from '@/components/shared/Footer.vue';
 import AppNavigationDrawer from '@/components/shared/NavigationDrawer.vue';
 import AppModal from '@/components/shared/Modal.vue';
 
+import AccountLogin from '@/views/popup/AccountLogin.vue';
+import AccountBox from '@/views/popup/AccountBox.vue';
+import Register from '@/views/popup/Register.vue';
+import SiteMail from '@/views/popup/SiteMail.vue';
+import Transaction from '@/views/popup/Transaction.vue';
+
 export default {
-  name: 'layout',
+  name: 'Layout',
   components: {
     AppHeader,
     AppFooter,
     AppNavigationDrawer,
-    AppModal
+    AppModal,
+    AccountLogin,
+    AccountBox,
+    Register,
+    SiteMail,
+    Transaction
   },
   data() {
     return {};

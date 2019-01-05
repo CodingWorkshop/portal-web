@@ -13,7 +13,7 @@ export default {
   },
   methods: {
     getMeiDonNow: function() {
-      const times = this.dayjs().format('YYYY/MM/DD HH:mm:ss');
+      const times = '12345678';
       this.MeiDonNow = times;
     }
   },

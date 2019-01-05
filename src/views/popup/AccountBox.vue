@@ -17,6 +17,8 @@
 
 <script>
 export default {
+  name: 'AccountBox',
+  components: {},
   data() {
     return {
       Account: this.$store.state.login.user,

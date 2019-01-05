@@ -183,7 +183,7 @@ export default {
   top: 0;
   right: 0;
   bottom: 0;
-  z-index: 1;
+  z-index: 4;
   width: 168px;
   background-color: #363636;
   box-shadow: 0 2px 20px rgba(0, 0, 0, 0.65);
