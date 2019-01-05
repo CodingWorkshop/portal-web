@@ -250,6 +250,7 @@ export default {
         font-size: 16px;
         line-height: 60px;
         text-align: left;
+        list-style-type: none;
         cursor: pointer;
 
         &:hover {
@@ -278,6 +279,7 @@ export default {
           font-size: 16px;
           font-weight: bold;
           background: #48316c;
+          list-style-type: none;
         }
       }
       .chat-btn {

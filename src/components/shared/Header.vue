@@ -40,7 +40,10 @@ export default {
 <style scoped lang="scss">
 header {
   min-width: 1000px;
-
+  .wrapper {
+    width: 1000px;
+    margin: 0 auto;
+  }
   .top-header {
     height: 40px;
     color: #fff;

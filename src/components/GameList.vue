@@ -1,6 +1,6 @@
 <template>
   <div class="game-list">
-    <Game v-for="list in openGameList" :key="list.id" :name="list.NameTw" :isLike="list.isLike"/>
+    <Game v-for="list in openGameLists" :key="list.id" :name="list.NameTw" :isLike="list.isLike"/>
   </div>
 </template>
 
@@ -13,8 +13,8 @@ export default {
     Game
   },
   computed: {
-    openGameList() {
-      return this.$store.state.game.openGameList;
+    openGameLists() {
+      return this.$store.state.game.openGameLists;
     }
   }
 };

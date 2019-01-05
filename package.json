@@ -35,7 +35,6 @@
   },
   "devDependencies": {
     "@types/jest": "^23.1.4",
-    "@types/webpack-env": "^1.13.6",
     "@vue/cli-plugin-babel": "^3.2.2",
     "@vue/cli-plugin-eslint": "^3.2.2",
     "@vue/cli-plugin-typescript": "^3.2.2",
