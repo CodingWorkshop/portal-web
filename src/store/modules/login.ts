@@ -7,25 +7,24 @@ export default class Login extends VuexModule {
   signing: boolean = false;
   loginStatus: boolean = false;
   user: String = '';
-  meiDonnow: String = '';
 
   @Mutation
-  updateSigning() {
+  updateSigning(): void {
     this.signing = !this.signing;
   }
+
   @Mutation
-  updateLoginStatus() {
+  updateLoginStatus(): void {
     this.loginStatus = !this.loginStatus;
   }
+
   @Mutation
-  updateUser(payload: any) {
+  updateUser(payload: any): void {
     this.user = payload.user;
   }
-  @Mutation
-  updatemeiDonnow() {}
 
   @Action
-  checkLogin() {
+  checkLogin(): Promise<any> {
     const store = this.context;
     return new Promise(resolve => {
       setTimeout(() => {
@@ -34,16 +33,18 @@ export default class Login extends VuexModule {
       }, 2000);
     });
   }
+
   @Action
-  submitLogin(payload: any) {
+  submitLogin(payload: any): Promise<any> {
     const store = this.context;
     return store.dispatch('checkLogin').then(() => {
       store.commit('updateLoginStatus');
       store.commit('updateUser', payload);
     });
   }
+
   @Action
-  submitLogout() {
+  submitLogout(): void {
     const store = this.context;
     store.commit('updateLoginStatus');
     store.commit('updateUser', {

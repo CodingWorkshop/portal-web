@@ -7,12 +7,13 @@ export default class Game extends VuexModule {
   openSearchBar: boolean = false;
 
   @Mutation
-  openGameList(gameCategoryObj: any) {
+  openGameList(gameCategoryObj: any): void {
     this.openGameLists = gameCategoryObj.SortList;
     this.openGameListKind = gameCategoryObj.GameKind;
   }
+
   @Mutation
-  switchSearchBar() {
+  switchSearchBar(): void {
     this.openSearchBar = !this.openSearchBar;
   }
 }

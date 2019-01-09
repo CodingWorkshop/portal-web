@@ -56,12 +56,13 @@ export default class Popup extends VuexModule {
   };
 
   @Mutation
-  openModal(option: any) {
+  openModal(option: any): void {
     this.isModalOpen = true;
     this.modalOptions = this.modelDetail[option];
   }
+
   @Mutation
-  closeModal() {
+  closeModal(): void {
     this.isModalOpen = false;
   }
 }
