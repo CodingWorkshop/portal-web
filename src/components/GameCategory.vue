@@ -38,12 +38,12 @@ export default {
   },
   mounted() {
     // 取得遊戲分類和遊戲列表
-    // Can Edit on https://next.json-generator.com/41iE5zvCr
+    // Can Edit on https://next.json-generator.com/E1rMysA-I
     this.axios
-      .get('https://next.json-generator.com/api/json/get/41iE5zvCr')
+      .get('https://next.json-generator.com/api/json/get/E1rMysA-I')
       .then(
         response => {
-          this.gameCategories = response.data;
+          this.gameCategories = response.ReturnObject;
           // 預設先顯示第一個遊戲
           this.$store.commit('openGameList', this.gameCategories[0]);
         },
