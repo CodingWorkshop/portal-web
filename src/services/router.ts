@@ -34,19 +34,5 @@ const router = new Router({
 });
 
 export default (store: Store<any>) => {
-  router.beforeEach(function(to, from, next) {
-    const requiredLogin = to.meta.requiredLogin || false;
-    const loginStatus = requiredLogin && !store.state.login.loginStatus;
-    if (!loginStatus) {
-      next();
-      return;
-    }
-
-    store.commit('openDrawerPage', {
-      type: 'login'
-    });
-    store.commit('recordDestinationPage', to.path);
-  });
-
   return router;
 };
