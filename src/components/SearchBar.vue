@@ -1,19 +1,19 @@
 <template>
-    <div class="searchbar" :class="{'active' : isSearchBarOpen}">
-      <input type="text" id="search" placeholder="search" v-model="search">
-      <div class="list">
-        <div>Hot</div>
-        <ul>
-          <li v-for="list in Hot" :key="list">{{list}}</li>
-        </ul>
-      </div>
-      <div class="list history">
-        <div>History</div>
-        <ul>
-          <li v-for="list in History" :key="list">{{list}}</li>
-        </ul>
-      </div>
+  <div class="searchbar" :class="{'active' : isSearchBarOpen}">
+    <input type="text" id="search" placeholder="search" v-model="searchKey">
+    <div class="list">
+      <div>Hot</div>
+      <ul>
+        <li v-for="list in Hot" :key="list">{{list}}</li>
+      </ul>
     </div>
+    <div class="list history">
+      <div>History</div>
+      <ul>
+        <li v-for="list in History" :key="list">{{list}}</li>
+      </ul>
+    </div>
+  </div>
 </template>
 
 <script>
@@ -22,10 +22,15 @@ export default {
   props: {},
   data() {
     return {
-      search: '',
+      searchKey: '',
       Hot: ['好熱', '真的很熱', '熱爆了', '熱熱', '台中熱'],
       History: ['這個', '小秘密', '午餐吃什麼', '提高尾牙抽獎中獎率', '蛤']
     };
+  },
+  watch: {
+    searchKey: function(newSearchKey) {
+      this.$store.commit('updateSearchKey', newSearchKey);
+    }
   },
   computed: {
     isSearchBarOpen() {
