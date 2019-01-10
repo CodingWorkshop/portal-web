@@ -5,20 +5,18 @@
   </div>
 </template>
 
-<script>
+<script lang="ts">
+import { Component, Vue } from 'vue-property-decorator';
 import Login from '@/components/popup/Login.vue';
-export default {
-  name: 'AccountLogin',
-  data: function() {
-    return {};
-  },
+
+@Component({
   components: {
     Login
   }
-};
+})
+export default class AccountLogin extends Vue {}
 </script>
 
-<!-- Add "scoped" attribute to limit CSS to this component only -->
 <style scoped lang="scss">
 .account {
   padding: 0 15px;
