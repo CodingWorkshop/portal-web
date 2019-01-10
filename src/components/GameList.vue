@@ -1,6 +1,7 @@
 <template>
   <div class="game-list">
-    <Game v-for="list in openGameLists" :key="list.id" :name="list.NameTw" :isLike="list.isLike"/>
+    <!-- <Game v-for="list in openGameLists" :key="list.id" :name="list.NameTw" :isLike="list.isLike"/> -->
+    <Game v-for="list in filterSearch" :key="list.id" :name="list.NameTw" :isLike="list.isLike"/>
   </div>
 </template>
 
@@ -15,6 +16,14 @@ export default {
   computed: {
     openGameLists() {
       return this.$store.state.game.openGameLists;
+    },
+    filterSearch: function() {
+      var originList = this.$store.state.game.openGameLists;
+      var searchKey = this.$store.state.game.searchKey;
+      return originList.filter(game => {
+        game.NameTw = game.NameTw.toString();
+        return game.NameTw.indexOf(searchKey) !== -1;
+      });
     }
   }
 };

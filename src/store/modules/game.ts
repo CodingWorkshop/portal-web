@@ -5,6 +5,7 @@ export default class Game extends VuexModule {
   openGameLists: Array<any> = [];
   openGameListKind: number = 0;
   openSearchBar: boolean = false;
+  searchKey: string = '';
 
   @Mutation
   openGameList(gameCategoryObj: any): void {
@@ -15,5 +16,10 @@ export default class Game extends VuexModule {
   @Mutation
   switchSearchBar(): void {
     this.openSearchBar = !this.openSearchBar;
+  }
+
+  @Mutation
+  updateSearchKey(searchKey: any): void {
+    this.searchKey = searchKey;
   }
 }
