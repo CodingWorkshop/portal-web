@@ -5,16 +5,17 @@
   </div>
 </template>
 
-<script lang="ts">
-import { Component, Vue } from 'vue-property-decorator';
+<script>
 import Login from '@/components/popup/Login.vue';
-
-@Component({
+export default {
+  name: 'AccountLogin',
+  data: function() {
+    return {};
+  },
   components: {
     Login
   }
-})
-export class AccountLogin extends Vue {}
+};
 </script>
 
 <!-- Add "scoped" attribute to limit CSS to this component only -->
