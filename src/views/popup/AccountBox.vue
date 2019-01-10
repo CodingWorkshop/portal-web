@@ -15,27 +15,24 @@
   </div>
 </template>
 
-<script>
-export default {
-  name: 'AccountBox',
-  components: {},
-  data() {
-    return {
-      Account: this.$store.state.login.user,
-      Balance: 1000.77
-    };
-  },
-  methods: {
-    updateBalance: function() {
-      console.log('沒得更新啦~~~');
-    },
-    signOut: function() {
-      this.$store.dispatch('submitLogout');
-      this.$store.commit('closeModal');
-      this.$router.push('/');
-    }
+<script lang="ts">
+import { Component, Vue } from 'vue-property-decorator';
+
+@Component({})
+export default class AccountBox extends Vue {
+  Account: string = this.$store.state.login.user;
+  Balance: number = 1000.77;
+
+  updateBalance() {
+    console.log('沒得更新啦~~~');
   }
-};
+
+  signOut() {
+    this.$store.dispatch('submitLogout');
+    this.$store.commit('closeModal');
+    this.$router.push('/');
+  }
+}
 </script>
 
 <style lang="scss" scoped>
