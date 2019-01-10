@@ -3,8 +3,21 @@
     <ul class="step-list">
       <li v-for="(item, index) in steplist" :key="index" :class="{'active':index<=step}">{{item}}</li>
     </ul>
-    <step1 v-if="step==0" :form-item="formlist[0]" :rules="ruleValidate" @next="nextStep"></step1>
-    <step2 v-if="step==1" :form-item="formlist[1]" :rules="ruleValidate" @next="nextStep" @prev="prevStep"></step2>
+    <step1
+      v-if="step==0"
+      :form-item="formlist[0]"
+      :rules="ruleValidate"
+      :reg-info="regInfo"
+      @next="nextStep"
+    ></step1>
+    <step2
+      v-if="step==1"
+      :form-item="formlist[1]"
+      :rules="ruleValidate"
+      :reg-info="regInfo"
+      @next="nextStep"
+      @prev="prevStep"
+    ></step2>
     <step3 v-if="step==2"></step3>
   </div>
 </template>
@@ -26,12 +39,11 @@ export default {
       steplist: ['输入账密', '会员资料', '完成注册'],
       formlist: [
         {
-          ParentAccount: '',
+          Referrer: '',
           Account: '',
           Password: '',
-          Confirm_Password: '',
+          CheckPsd: '',
           MoneyPassword: ''
-          // agree: ''
         },
         {
           Email: '',
@@ -90,6 +102,68 @@ export default {
             required: true
           }
         ]
+      },
+      regInfo: {
+        Referrer: {
+          name: '推薦人',
+          placeholder: '請輸入推薦人',
+          type: 'text',
+          step: 1
+        },
+        Account: {
+          name: '會員帳號',
+          placeholder: '2 - 15 字元，字母開頭，限字母，數字和底線',
+          type: 'text',
+          maxlength: 15,
+          pattern: /^[a-zA-Z]\w{1,}/,
+          step: 1
+        },
+        Password: {
+          name: '會員密碼',
+          placeholder: '6 個字元以上，須包含字母及數字',
+          type: 'password',
+          pattern: /\w{6,}/,
+          step: 1
+        },
+        CheckPsd: {
+          name: '確認密碼',
+          model: 'CheckPsd',
+          placeholder: '請再確認密碼',
+          type: 'password',
+          step: 1
+        },
+        MoneyPassword: {
+          name: '取款密碼',
+          placeholder: '請輸入取款密碼',
+          type: 'password',
+          pattern: /[0-9]/,
+          step: 1
+        },
+        Name: {
+          name: '真實姓名',
+          placeholder: '請輸入真實姓名 需與提款銀行戶口相同',
+          type: 'text',
+          step: 2
+        },
+        Mobile: {
+          name: '手機號碼',
+          placeholder: '請輸入手機號碼',
+          type: 'text',
+          pattern: /[0-9]/,
+          step: 2
+        },
+        Email: {
+          name: '電子信箱',
+          placeholder: '請輸入電子信箱',
+          type: 'email',
+          step: 2
+        },
+        Sex: {
+          name: '性別',
+          placeholder: '請輸入性別',
+          type: 'text',
+          step: 2
+        }
       }
     };
   },
@@ -114,6 +188,16 @@ export default {
     prevStep: function() {
       this.step--;
     }
+  },
+  mounted: function() {
+    this.axios
+      .get('https://next.json-generator.com/api/json/get/Ek4rMjJzI')
+      .then(response => {
+        if (!response.IsSuccess) {
+          return;
+        }
+        const masterSetting = response.ReturnObject;
+      });
   }
 };
 </script>

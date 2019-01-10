@@ -7,15 +7,15 @@
       class="register-form"
       ref="registerForm"
     >
-      <FormItem :label="index" :prop="index" v-for="(item,index) in formItem" :key="index">
-        <i-input v-model="formItem[index]" :placeholder="index"></i-input>
+      <FormItem :label="regInfo[index].name" :prop="index" v-for="(item,index) in formItem" :key="index">
+        <i-input v-model="formItem[index]" :placeholder="regInfo[index].placeholder"></i-input>
       </FormItem>
       <FormItem class="step-1-btn">
-        <!-- <Checkbox v-model="formItem.agree">
+        <Checkbox v-model="agree">
           已满18 岁，且同意本站
           <span>用户注册协议</span>
-        </Checkbox>-->
-        <Button @click="nextStep('registerForm')">下一步</Button>
+        </Checkbox>
+        <Button @click="nextStep('registerForm')" :disabled="!agree">下一步</Button>
       </FormItem>
     </Form>
   </div>
@@ -23,7 +23,12 @@
 
 <script>
 export default {
-  props: ['formItem', 'rules'],
+  props: ['formItem', 'rules', 'regInfo'],
+  data() {
+    return {
+      agree: false
+    };
+  },
   methods: {
     nextStep: function(name) {
       this.$refs[name].validate(valid => {
