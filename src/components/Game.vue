@@ -2,8 +2,12 @@
   <div class="game">
     <img src="https://via.placeholder.com/130">
     <div class="game-text">
-      {{name}}
-      <i class="fa-heart" :class="[isLike? 'fas':'far']"></i>
+      {{game.NameTw}}
+      <i
+        class="fa-heart"
+        :class="[game.isLike? 'fas':'far']"
+        @click="switchLike(game)"
+      ></i>
     </div>
   </div>
 </template>
@@ -11,7 +15,15 @@
 <script>
 export default {
   name: 'Game',
-  props: { name: String, isLike: Boolean }
+  props: { game: Object },
+  methods: {
+    switchLike(game) {
+      this.$store.dispatch('submitAddLikeGame', game);
+
+      //var test = this.$store.getters.getLikeList;
+      //console.log(test);
+    }
+  }
 };
 </script>
 
@@ -38,6 +50,7 @@ export default {
       float: right;
       color: #333;
       line-height: 24px;
+      cursor: pointer;
     }
   }
 }

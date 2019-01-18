@@ -4,6 +4,7 @@ import Vuex from 'vuex';
 import login from './modules/login';
 import popup from './modules/popup';
 import game from './modules/game';
+import like from './modules/like';
 import createPersistedState from 'vuex-persistedstate';
 
 Vue.use(Vuex);
@@ -12,7 +13,8 @@ export default new Vuex.Store({
   modules: {
     login: login,
     popup: popup,
-    game: game
+    game: game,
+    like: like
   },
   plugins: [
     createPersistedState({

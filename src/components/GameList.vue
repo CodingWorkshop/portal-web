@@ -1,7 +1,7 @@
 <template>
   <div class="game-list">
-    <!-- <Game v-for="list in openGameLists" :key="list.id" :name="list.NameTw" :isLike="list.isLike"/> -->
-    <Game v-for="list in filterSearch" :key="list.id" :name="list.NameTw" :isLike="list.isLike"/>
+    <!-- <Game v-for="list in openGameLists" :key="list.id" :game="list"/> -->
+    <Game v-for="list in filterSearch" :key="list.id" :game="list"/>
   </div>
 </template>
 

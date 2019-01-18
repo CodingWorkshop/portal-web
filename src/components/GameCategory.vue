@@ -10,9 +10,13 @@
         <i class="fas" :class="gc.Icon"></i>
         {{gc.GameName}}
       </li>
-      <li @click="openSearchBar()">
+      <li @click="openSearchBar()" :class="{active:isSearchBarOpen}">
         <i class="fas fa-search"></i>
         Search
+      </li>
+      <li>
+        <i class="fas fa-star-and-crescent"></i>
+        Love
       </li>
     </ul>
   </div>
@@ -55,6 +59,9 @@ export default {
   computed: {
     activeKind() {
       return this.$store.state.game.openGameListKind;
+    },
+    isSearchBarOpen() {
+      return this.$store.state.game.openSearchBar;
     }
   }
 };
