@@ -18,10 +18,19 @@ export default {
   props: { game: Object },
   methods: {
     switchLike(game) {
-      this.$store.dispatch('submitAddLikeGame', game);
+      // 先改頁面上的愛心
+      game.isLike = !game.isLike;
 
-      //var test = this.$store.getters.getLikeList;
-      //console.log(test);
+      var listIndex = this.$store.getters.getLikeListIndexById(game.id);
+      // 我的最愛 不愛的就丟掉
+      // 所以如果vuex裡面有就刪，不然就新增
+      if (listIndex !== -1) {
+        console.log('vuex has this data - ' + game.id + ', ' + game.NameTw);
+        var giveObj = { game: game, index: listIndex };
+        this.$store.dispatch('submitDeleteLikeGame', giveObj);
+      } else {
+        this.$store.dispatch('submitAddLikeGame', game);
+      }
     }
   }
 };

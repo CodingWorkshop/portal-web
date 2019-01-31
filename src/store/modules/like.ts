@@ -8,20 +8,39 @@ export default class Like extends VuexModule {
     return this.likeList;
   }
 
-  @Mutation
-  addLikeGame(clickGame: game): void {
-    let game = clickGame;
-    this.likeList.push(game);
+  get getLikeListIndexById() {
+    return function getLikeListIndexById(id: string) {
+      return Like.state.likeList.findIndex((v: game, i: string) => v.id === id);
+    };
   }
 
   @Mutation
-  updateLikeGame(clickGame: game): void {}
+  addLikeGame(clickGame: game): void {
+    this.likeList.push(clickGame);
+  }
 
   @Mutation
-  changeLikeGame(clickGame: game): void {}
+  changeLikeGame(reciveObj: reciveGame): void {
+    // 把本來那個刪掉 在原位置塞新的 ()
+    this.likeList.splice(reciveObj.index, 1, reciveObj.game);
+  }
 
   @Mutation
-  DeleteLikeGame(clickGame: game): void {}
+  deleteLikeGame(reciveObj: reciveGame): void {
+    // 把本來那個刪掉
+    this.likeList.splice(reciveObj.index, 1);
+  }
+
+  @Action
+  submitAddAccountLikeGame(accountLikeList: [game]): void {
+    const store = this.context;
+    // 跑迴圈 比對現在清單 沒有的才丟進去
+    accountLikeList.forEach((game: game) => {
+      if (this.getLikeListIndexById(game.id) === -1) {
+        store.commit('addLikeGame', game);
+      }
+    });
+  }
 
   @Action
   submitAddLikeGame(clickGame: game): void {
@@ -30,26 +49,24 @@ export default class Like extends VuexModule {
   }
 
   @Action
-  submitUpdateLikeGame(clickGame: game): void {
+  submitChangeLikeGame(reciveObj: object): void {
     const store = this.context;
-    store.commit('updateLikeGame', clickGame);
+    store.commit('changeLikeGame', reciveObj);
   }
 
   @Action
-  submitChangeLikeGame(clickGame: game): void {
+  submitDeleteLikeGame(reciveObj: object): void {
     const store = this.context;
-    store.commit('changeLikeGame', clickGame);
-  }
-
-  @Action
-  submitDeleteLikeGame(clickGame: game): void {
-    const store = this.context;
-    store.commit('deleteLikeGame', clickGame);
+    store.commit('deleteLikeGame', reciveObj);
   }
 }
 
 interface game {
-  id?: string;
-  NameTw?: string;
-  isLike?: boolean;
+  id: string;
+  NameTw: string;
+  isLike: boolean;
+}
+interface reciveGame {
+  game: game;
+  index: number;
 }

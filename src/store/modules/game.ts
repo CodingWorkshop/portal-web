@@ -8,6 +8,12 @@ export default class Game extends VuexModule {
   searchKey: string = '';
 
   @Mutation
+  openLikeList(likeList: any): void {
+    this.openGameLists = likeList;
+    this.openGameListKind = 99;
+  }
+
+  @Mutation
   openGameList(gameCategoryObj: any): void {
     this.openGameLists = gameCategoryObj.SortList;
     this.openGameListKind = gameCategoryObj.GameKind;

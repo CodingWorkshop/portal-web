@@ -51,6 +51,7 @@ export default {
         })
         .then(() => {
           this.$store.commit('openModal', 'AccountBox');
+          this.getLikeList();
         });
     },
     forget() {
@@ -58,6 +59,23 @@ export default {
         title: '忘記密碼',
         content: '<h3>我也不知道，幫QQ</h3>'
       });
+    },
+    getLikeList() {
+      // 取得我ㄉ最愛
+      // Can Edit on https://next.json-generator.com/NyXFaCjzI
+      this.axios
+        .get('https://next.json-generator.com/api/json/get/NyXFaCjzI')
+        .then(
+          response => {
+            this.$store.dispatch(
+              'submitAddAccountLikeGame',
+              response.ReturnObject.SortList
+            );
+          },
+          () => {
+            console.log('fail');
+          }
+        );
     }
   },
   created() {},

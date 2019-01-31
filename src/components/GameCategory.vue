@@ -14,7 +14,7 @@
         <i class="fas fa-search"></i>
         Search
       </li>
-      <li>
+      <li @click="openLikeList()">
         <i class="fas fa-star-and-crescent"></i>
         Love
       </li>
@@ -32,6 +32,11 @@ export default {
     };
   },
   methods: {
+    openLikeList: function() {
+      var likeList = this.$store.getters.getLikeList;
+      this.$store.commit('openLikeList', likeList);
+      this.$router.push('lobby');
+    },
     openGameList: function(gameCategoryObj) {
       this.$store.commit('openGameList', gameCategoryObj);
       this.$router.push('lobby');
@@ -42,9 +47,11 @@ export default {
   },
   mounted() {
     // 取得遊戲分類和遊戲列表
-    // Can Edit on https://next.json-generator.com/E1rMysA-I
+    // Can Edit on https://next.json-generator.com/V1k4u9yzU
     this.axios
-      .get('https://next.json-generator.com/api/json/get/E1rMysA-I')
+      .get('https://next.json-generator.com/api/json/get/V1k4u9yzU')
+      // Can Edit on https://next.json-generator.com/E1rMysA-I
+      // https://next.json-generator.com/api/json/get/E1rMysA-I
       .then(
         response => {
           this.gameCategories = response.ReturnObject;
