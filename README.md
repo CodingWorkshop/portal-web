@@ -1,4 +1,4 @@
-[![Build Status](https://travis-ci.org/CodingWorkshop/portal-web.svg?branch=master)](https://travis-ci.org/CodingWorkshop/portal-web) [![Dependency Status](https://david-dm.org/CodingWorkshop/portal-web.svg)](https://david-dm.org/CodingWorkshop/portal-web) [![devDependency Status](https://david-dm.org/CodingWorkshop/portal-web/dev-status.svg)](https://david-dm.org/CodingWorkshop/portal-web?type=dev)
+[![Build Status](https://travis-ci.com/CodingWorkshop/portal-web.svg?branch=master)](https://travis-ci.com/CodingWorkshop/portal-web) [![Dependency Status](https://david-dm.org/CodingWorkshop/portal-web.svg)](https://david-dm.org/CodingWorkshop/portal-web) [![devDependency Status](https://david-dm.org/CodingWorkshop/portal-web/dev-status.svg)](https://david-dm.org/CodingWorkshop/portal-web?type=dev)
 
 # portal-web
 
